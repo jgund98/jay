@@ -255,14 +255,26 @@ export default function TheScan() {
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 initial={false}
-                animate={
-                  phase === "idle"
-                    ? { pathLength: 0.28, opacity: 0.45 }
-                    : { pathLength: 1, opacity: 1 }
-                }
-                transition={{ duration: 1.5, ease: "easeInOut" }}
+                animate={{ pathLength: 1, opacity: phase === "idle" ? 0.4 : 1 }}
+                transition={{ duration: 1.4, ease: "easeInOut" }}
                 style={{ filter: "drop-shadow(0 0 7px rgba(56,225,232,0.55))" }}
               />
+              {/* idle heartbeat — the terminal is connected and waiting */}
+              {phase === "idle" && (
+                <motion.circle
+                  r="3.5"
+                  fill="#38E1E8"
+                  animate={{ cx: [0, 340], opacity: [0, 1, 1, 0] }}
+                  transition={{
+                    duration: 3.4,
+                    repeat: Infinity,
+                    ease: "linear",
+                    times: [0, 0.08, 0.9, 1],
+                  }}
+                  cy="60"
+                  style={{ filter: "drop-shadow(0 0 6px #38E1E8)" }}
+                />
+              )}
             </svg>
 
             <AnimatePresence>

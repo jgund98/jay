@@ -1,10 +1,14 @@
 /*
- * Screenshot rig. Full-resolution captures at every breakpoint the polish
- * loop cares about, so "it looks right in code" never stands in for looking.
+ * Screenshot rig.
  *
- *   node scripts/shoot.js                    → all pages, all widths
- *   node scripts/shoot.js /contact 390       → one page, one width
- *   node scripts/shoot.js / 1440 fold        → viewport-only (the fold)
+ * Captures viewport-sized panels while scrolling, rather than one fullPage
+ * shot. Two reasons: framer-motion's whileInView reveals need a real viewport
+ * to fire, and the hero is sized in svh — growing the viewport to capture the
+ * whole page would distort the very layout we're checking.
+ *
+ *   node scripts/shoot.js                  → every page, every width
+ *   node scripts/shoot.js /contact 390     → one page, one width
+ *   node scripts/shoot.js / 1440 fold      → first viewport only
  */
 const puppeteer = require("C:/Users/Lucky/gus-renny/node_modules/puppeteer");
 const fs = require("fs");
@@ -31,7 +35,12 @@ const WIDTHS = [375, 768, 1440, 1920];
   const foldOnly = process.argv[4] === "fold";
 
   const pages = argPath
-    ? [[argPath, argPath.replace(/[^a-z0-9]+/gi, "-").replace(/^-|-$/g, "") || "home"]]
+    ? [
+        [
+          argPath,
+          argPath.replace(/[^a-z0-9]+/gi, "-").replace(/^-|-$/g, "") || "home",
+        ],
+      ]
     : PAGES;
   const widths = argW ? [argW] : WIDTHS;
 
@@ -43,40 +52,38 @@ const WIDTHS = [375, 768, 1440, 1920];
 
   for (const w of widths) {
     for (const [url, name] of pages) {
+      const vh = w < 500 ? 812 : 900;
       const page = await browser.newPage();
-      await page.setViewport({ width: w, height: w < 500 ? 812 : 900 });
+      await page.setViewport({ width: w, height: vh });
       await page.evaluateOnNewDocument(() => {
         try {
           sessionStorage.setItem("gc-owner-seen", "1");
         } catch {}
       });
       await page.goto(BASE + url, { waitUntil: "networkidle0", timeout: 60000 });
-      // let scroll-triggered reveals resolve
-      await page.evaluate(async () => {
-        await new Promise((r) => {
-          let y = 0;
-          const step = () => {
-            y += window.innerHeight * 0.8;
-            window.scrollTo(0, y);
-            if (y < document.body.scrollHeight) setTimeout(step, 90);
-            else {
-              window.scrollTo(0, 0);
-              setTimeout(r, 500);
-            }
-          };
-          step();
-        });
-      });
-      await new Promise((r) => setTimeout(r, 500));
+      await new Promise((r) => setTimeout(r, 700));
 
       const overflow = await page.evaluate(
         () => document.documentElement.scrollWidth - window.innerWidth,
       );
-      const file = path.join(OUT, `${name}-${w}${foldOnly ? "-fold" : ""}.png`);
-      await page.screenshot({ path: file, fullPage: !foldOnly });
-      console.log(
-        `${name} @${w}  overflow:${overflow}px  ->  ${path.basename(file)}`,
-      );
+      const docH = await page.evaluate(() => document.body.scrollHeight);
+      const panels = foldOnly ? 1 : Math.ceil(docH / vh);
+
+      // clear old panels for this page/width
+      fs.readdirSync(OUT)
+        .filter((f) => f.startsWith(`${name}-${w}-s`))
+        .forEach((f) => fs.unlinkSync(path.join(OUT, f)));
+
+      for (let i = 0; i < panels; i++) {
+        await page.evaluate((y) => window.scrollTo(0, y), i * vh);
+        await new Promise((r) => setTimeout(r, i === 0 ? 900 : 650));
+        const file = path.join(
+          OUT,
+          foldOnly ? `${name}-${w}-fold.png` : `${name}-${w}-s${i + 1}.png`,
+        );
+        await page.screenshot({ path: file });
+      }
+      console.log(`${name} @${w}  overflow:${overflow}px  panels:${panels}`);
       await page.close();
     }
   }

@@ -63,6 +63,7 @@
   }
 }
 
+@layer components {
 /* ── Logo wordmark ─────────────────────────────────────────── */
 .gc-wordmark {
   display: inline-flex;
@@ -307,4 +308,5 @@
     transition-duration: 0.001ms !important;
     scroll-behavior: auto !important;
   }
+}
 }

@@ -12,7 +12,13 @@ export default function ServicesGrid({
   intro?: string;
   exclude?: string;
 }) {
-  const list = services.filter((s) => s.slug !== exclude);
+  /* On a service page this runs as a "related" strip — four cards, one clean
+     row, no hero card. On the home page it's the full set, laid out so the
+     grid ends flush. */
+  const related = Boolean(exclude);
+  const list = related
+    ? services.filter((s) => s.slug !== exclude).slice(0, 4)
+    : services;
 
   return (
     <section className="relative overflow-hidden bg-carbon-2 py-20 sm:py-24">
@@ -42,8 +48,17 @@ export default function ServicesGrid({
           {list.map((s, i) => (
             <Item
               key={s.slug}
+              /* The lead card takes a 2×2 block; the last card widens to two
+                 columns so the grid ends flush instead of leaving an orphan
+                 hole in the bottom-right. */
               className={
-                i === 0 ? "sm:col-span-2 lg:col-span-2 lg:row-span-2" : ""
+                related
+                  ? ""
+                  : i === 0
+                    ? "sm:col-span-2 lg:col-span-2 lg:row-span-2"
+                    : i === list.length - 1
+                      ? "lg:col-span-2"
+                      : ""
               }
             >
               <Link
@@ -52,7 +67,7 @@ export default function ServicesGrid({
               >
                 <div
                   className={`relative w-full overflow-hidden ${
-                    i === 0 ? "aspect-[16/10] lg:aspect-[16/11]" : "aspect-[16/9]"
+                    !related && i === 0 ? "aspect-[16/10] lg:aspect-[16/11]" : "aspect-[16/9]"
                   }`}
                 >
                   <Image
@@ -60,8 +75,7 @@ export default function ServicesGrid({
                     alt={s.imageAlt}
                     fill
                     sizes={
-                      i === 0
-                        ? "(max-width:639px) 100vw, (max-width:1023px) 100vw, 50vw"
+                      !related && i === 0 ? "(max-width:639px) 100vw, (max-width:1023px) 100vw, 50vw"
                         : "(max-width:639px) 100vw, (max-width:1023px) 50vw, 25vw"
                     }
                     className="object-cover transition-transform duration-[900ms] ease-out group-hover:scale-[1.06]"
@@ -73,17 +87,17 @@ export default function ServicesGrid({
                 <div className="flex flex-1 flex-col p-5">
                   <h3
                     className={`font-display font-extrabold leading-tight text-chrome transition-colors group-hover:text-cyan ${
-                      i === 0 ? "text-[clamp(1.3rem,3vw,1.75rem)]" : "text-[19px]"
+                      !related && i === 0 ? "text-[clamp(1.3rem,3vw,1.75rem)]" : "text-[19px]"
                     }`}
                   >
                     {s.name}
                   </h3>
                   <p
                     className={`mt-2 leading-relaxed text-chrome/55 ${
-                      i === 0 ? "text-[15.5px]" : "text-[14px]"
+                      !related && i === 0 ? "text-[15.5px]" : "text-[14px]"
                     }`}
                   >
-                    {i === 0 ? s.blurb : s.short}
+                    {!related && i === 0 ? s.blurb : s.short}
                   </p>
                   <span className="mt-4 inline-flex items-center gap-1.5 font-display text-[13.5px] font-bold text-violet-soft transition-colors group-hover:text-cyan">
                     See details
