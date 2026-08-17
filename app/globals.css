@@ -64,55 +64,6 @@
 }
 
 @layer components {
-/* ── Logo wordmark ─────────────────────────────────────────── */
-.gc-wordmark {
-  display: inline-flex;
-  flex-direction: column;
-  line-height: 0.86;
-  font-family: var(--font-display);
-  font-style: italic;
-}
-.gc-wordmark__main {
-  font-weight: 900;
-  font-size: 1.12em;
-  letter-spacing: 0.012em;
-  text-transform: uppercase;
-  background: linear-gradient(
-    172deg,
-    #ffffff 4%,
-    #cdd6ff 30%,
-    #8b3dff 56%,
-    #d34bea 78%,
-    #ff3dc4 100%
-  );
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  /* faux chrome edge — reads crisp on dark and on light */
-  filter: drop-shadow(0 1px 0 rgba(255, 255, 255, 0.28));
-}
-.gc-wordmark__sub {
-  font-weight: 700;
-  font-size: 0.44em;
-  letter-spacing: 0.34em;
-  text-transform: uppercase;
-  color: var(--color-magenta);
-  padding-top: 0.28em;
-}
-.on-light .gc-wordmark__main {
-  background: linear-gradient(
-    172deg,
-    #3a2a80 2%,
-    #6b3fd8 30%,
-    #8b3dff 58%,
-    #c53fe0 80%,
-    #ff2fb8 100%
-  );
-  -webkit-background-clip: text;
-  background-clip: text;
-  filter: none;
-}
-
 /* ── Electric trace: the site-wide motion signature ────────── */
 .gc-trace {
   height: 1px;
@@ -275,12 +226,6 @@
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-}
-.gc-wordmark__main {
-  padding-bottom: 0.1em;
-  margin-bottom: -0.1em;
-  padding-right: 0.05em;
-  margin-right: -0.05em;
 }
 
 @keyframes gcmarquee {

@@ -7,7 +7,6 @@ import { EASE } from "@/lib/motion";
 import { site, coreCities, allCities } from "@/lib/site";
 import Stars from "./Stars";
 import { PhoneIcon } from "./Header";
-import { GCMark } from "./Logo";
 
 const rise = {
   hidden: { opacity: 0, y: 22 },
@@ -105,9 +104,6 @@ export default function Hero() {
             <div className="absolute inset-0 bg-gradient-to-tr from-violet-deep/55 via-transparent to-cyan/12 mix-blend-color" />
             <div className="absolute inset-0 bg-gradient-to-t from-carbon via-carbon/12 to-transparent" />
             <div className="absolute inset-0 bg-gradient-to-r from-carbon/70 via-transparent to-transparent lg:from-carbon/45" />
-
-            {/* the mark, riding the photo */}
-            <GCMark className="absolute -left-2 bottom-3 h-16 w-auto opacity-90 drop-shadow-[0_6px_20px_rgba(0,0,0,0.6)] sm:h-20 lg:left-3 lg:h-24" />
 
             <div className="absolute bottom-3 right-3 rounded-xl border border-white/15 bg-carbon/72 px-3.5 py-2.5 backdrop-blur-md">
               <p className="font-display text-[13px] font-extrabold uppercase leading-none tracking-wide text-cyan">

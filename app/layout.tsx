@@ -60,6 +60,10 @@ export const metadata: Metadata = {
   },
   alternates: { canonical: "/" },
   robots: { index: true, follow: true },
+  icons: {
+    icon: [{ url: "/img/logo-icon.png", type: "image/png", sizes: "512x512" }],
+    apple: [{ url: "/img/logo-icon.png", sizes: "512x512" }],
+  },
 };
 
 export const viewport: Viewport = {

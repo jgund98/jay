@@ -56,8 +56,9 @@ export default function Header() {
           className="flex shrink-0 items-center"
         >
           <Logo
-            markClassName="h-8 w-auto sm:h-10"
-            className="text-[13px] sm:text-[15px]"
+            priority
+            markClassName="h-10 w-auto sm:h-12"
+            wordClassName="h-[19px] w-auto sm:h-[23px]"
           />
         </Link>
 

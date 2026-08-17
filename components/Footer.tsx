@@ -14,7 +14,10 @@ export default function Footer() {
         <div className="grid gap-10 md:grid-cols-[1.3fr_1fr_1fr] md:gap-8 lg:gap-14">
           <div>
             <Link href="/" className="inline-flex" aria-label={`${site.name} — home`}>
-              <Logo markClassName="h-11 w-auto" className="text-[17px]" />
+              <Logo
+                markClassName="h-14 w-auto"
+                wordClassName="h-[26px] w-auto"
+              />
             </Link>
             <p className="mt-5 max-w-sm text-[15px] leading-relaxed text-chrome/60">
               Owner-operated mobile auto repair out of {site.baseCity}, Texas.{" "}
