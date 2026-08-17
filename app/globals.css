@@ -1,0 +1,310 @@
+@import "tailwindcss";
+
+@theme {
+  /* ── Brand, sampled straight off Jay's logo ─────────────── */
+  --color-carbon: #08070f;
+  --color-carbon-2: #0e0c1b;
+  --color-carbon-3: #171429;
+  --color-violet: #8b3dff;
+  --color-violet-deep: #4a1c9e;
+  --color-violet-soft: #b7a6ff;
+  --color-cyan: #38e1e8;
+  --color-cyan-soft: #9bf3f6;
+  --color-magenta: #ff3dc4;
+  --color-chrome: #f2f4ff;
+
+  /* ── Light sections ─────────────────────────────────────── */
+  --color-paper: #f4f6fb;
+  --color-paper-2: #e7ebf4;
+  --color-steel: #5a6480;
+  --color-steel-dark: #2b3247;
+
+  --font-display: var(--font-saira), system-ui, sans-serif;
+  --font-sans: var(--font-inter), system-ui, sans-serif;
+  --font-mono: var(--font-mono-code), ui-monospace, monospace;
+}
+
+@layer base {
+  * {
+    min-width: 0;
+  }
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+  }
+  body {
+    background: var(--color-carbon);
+    color: var(--color-chrome);
+    font-family: var(--font-sans);
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+  ::selection {
+    background: var(--color-violet);
+    color: #fff;
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+  }
+  p {
+    text-wrap: pretty;
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-cyan);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+}
+
+/* ── Logo wordmark ─────────────────────────────────────────── */
+.gc-wordmark {
+  display: inline-flex;
+  flex-direction: column;
+  line-height: 0.86;
+  font-family: var(--font-display);
+  font-style: italic;
+}
+.gc-wordmark__main {
+  font-weight: 900;
+  font-size: 1.12em;
+  letter-spacing: 0.012em;
+  text-transform: uppercase;
+  background: linear-gradient(
+    172deg,
+    #ffffff 4%,
+    #cdd6ff 30%,
+    #8b3dff 56%,
+    #d34bea 78%,
+    #ff3dc4 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  /* faux chrome edge — reads crisp on dark and on light */
+  filter: drop-shadow(0 1px 0 rgba(255, 255, 255, 0.28));
+}
+.gc-wordmark__sub {
+  font-weight: 700;
+  font-size: 0.44em;
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+  color: var(--color-magenta);
+  padding-top: 0.28em;
+}
+.on-light .gc-wordmark__main {
+  background: linear-gradient(
+    172deg,
+    #3a2a80 2%,
+    #6b3fd8 30%,
+    #8b3dff 58%,
+    #c53fe0 80%,
+    #ff2fb8 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  filter: none;
+}
+
+/* ── Electric trace: the site-wide motion signature ────────── */
+.gc-trace {
+  height: 1px;
+  width: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    color-mix(in srgb, var(--color-violet) 55%, transparent) 20%,
+    var(--color-cyan) 50%,
+    color-mix(in srgb, var(--color-magenta) 65%, transparent) 80%,
+    transparent
+  );
+  opacity: 0.5;
+}
+
+/* ── Buttons ───────────────────────────────────────────────── */
+.btn {
+  --btn-bg: var(--color-violet);
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  font-family: var(--font-display);
+  font-weight: 800;
+  letter-spacing: 0.01em;
+  border-radius: 10px;
+  padding: 0.92rem 1.5rem;
+  overflow: hidden;
+  isolation: isolate;
+  transition:
+    transform 0.16s ease,
+    box-shadow 0.22s ease,
+    filter 0.22s ease;
+  will-change: transform;
+}
+.btn::after {
+  /* spark sweep — the logo's arc, as a hover */
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(
+    100deg,
+    transparent 20%,
+    rgba(255, 255, 255, 0.42) 46%,
+    transparent 68%
+  );
+  transform: translateX(-115%);
+  transition: transform 0.55s cubic-bezier(0.3, 0.9, 0.3, 1);
+}
+.btn:hover::after {
+  transform: translateX(115%);
+}
+.btn:hover {
+  transform: translateY(-2px);
+}
+.btn:active {
+  transform: translateY(0);
+}
+
+.btn-primary {
+  background: linear-gradient(112deg, #8b3dff 0%, #c33ce6 52%, #ff3dc4 100%);
+  color: #fff;
+  box-shadow:
+    0 8px 26px -8px rgba(139, 61, 255, 0.85),
+    inset 0 1px 0 rgba(255, 255, 255, 0.28);
+}
+.btn-primary:hover {
+  box-shadow:
+    0 14px 34px -8px rgba(199, 60, 230, 0.9),
+    inset 0 1px 0 rgba(255, 255, 255, 0.35);
+}
+.btn-call {
+  background: linear-gradient(112deg, #2ad3da 0%, #38e1e8 100%);
+  color: #05202a;
+  box-shadow:
+    0 8px 26px -10px rgba(56, 225, 232, 0.8),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+.btn-ghost-light {
+  background: #ffffff;
+  color: #171429;
+  box-shadow: 0 6px 20px -8px rgba(0, 0, 0, 0.4);
+}
+.btn-outline {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--color-chrome);
+  border: 1px solid rgba(183, 166, 255, 0.4);
+  backdrop-filter: blur(8px);
+}
+
+/* ── Cards ─────────────────────────────────────────────────── */
+.edge-card {
+  position: relative;
+  border-radius: 16px;
+  background: linear-gradient(
+    168deg,
+    rgba(255, 255, 255, 0.075),
+    rgba(255, 255, 255, 0.018)
+  );
+  border: 1px solid rgba(183, 166, 255, 0.16);
+  transition:
+    border-color 0.3s ease,
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+.edge-card:hover {
+  border-color: rgba(56, 225, 232, 0.45);
+  box-shadow: 0 18px 44px -22px rgba(139, 61, 255, 0.7);
+}
+
+.hairline {
+  border-top: 1px solid rgba(183, 166, 255, 0.14);
+}
+
+/* ── Carbon weave texture, used sparingly ──────────────────── */
+.weave {
+  background-image:
+    repeating-linear-gradient(
+      54deg,
+      rgba(255, 255, 255, 0.028) 0px,
+      rgba(255, 255, 255, 0.028) 1px,
+      transparent 1px,
+      transparent 5px
+    ),
+    repeating-linear-gradient(
+      -54deg,
+      rgba(255, 255, 255, 0.02) 0px,
+      rgba(255, 255, 255, 0.02) 1px,
+      transparent 1px,
+      transparent 5px
+    );
+}
+
+.grid-fade {
+  background-image:
+    linear-gradient(rgba(139, 61, 255, 0.09) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(139, 61, 255, 0.09) 1px, transparent 1px);
+  background-size: 46px 46px;
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 20%, transparent 75%);
+}
+
+/* ── Utilities ─────────────────────────────────────────────── */
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+}
+
+/* background-clip:text crops the glyph box, so italic descenders (y, g, j)
+   get sheared off. Give them room, then take the space back. */
+.grad-text {
+  display: block;
+  padding-bottom: 0.14em;
+  margin-bottom: -0.14em;
+  padding-right: 0.06em;
+  margin-right: -0.06em;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.gc-wordmark__main {
+  padding-bottom: 0.1em;
+  margin-bottom: -0.1em;
+  padding-right: 0.05em;
+  margin-right: -0.05em;
+}
+
+@keyframes gcmarquee {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  scrollbar-width: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
