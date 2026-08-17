@@ -81,15 +81,17 @@ export default function OwnerPopup() {
               </svg>
             </button>
 
-            <div className="relative h-[190px] w-full">
+            {/* Contain, not cover — the whole point is that you can read the
+                number on the card. */}
+            <div className="relative h-[200px] w-full bg-carbon-3/60 pt-4">
               <Image
                 src="/img/real-card.jpg"
                 alt={`${site.owner}'s business card`}
                 fill
                 sizes="430px"
-                className="object-cover object-center"
+                className="object-contain object-top px-5"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-carbon-2 via-carbon-2/25 to-transparent" />
+              <div className="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-carbon-2 to-transparent" />
             </div>
 
             <div className="-mt-6 px-6 pb-6">
