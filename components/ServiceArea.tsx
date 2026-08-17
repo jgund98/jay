@@ -70,7 +70,11 @@ export default function ServiceArea({ compact = false }: { compact?: boolean }) 
   }, [hx]);
 
   return (
-    <section className="relative overflow-hidden bg-carbon py-20 sm:py-24">
+    <section
+      className={`relative overflow-hidden bg-carbon ${
+        compact ? "pb-20 pt-4 sm:pb-24" : "py-20 sm:py-24"
+      }`}
+    >
       <div
         className="pointer-events-none absolute left-1/2 top-1/2 h-[640px] w-[900px] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-25 blur-[130px]"
         style={{
@@ -82,7 +86,9 @@ export default function ServiceArea({ compact = false }: { compact?: boolean }) 
       <div className="relative mx-auto max-w-[1240px] px-4 sm:px-6">
         <div className="grid gap-10 lg:grid-cols-[0.82fr_1.18fr] lg:items-center lg:gap-14">
           <div>
-            <p className="eyebrow text-cyan">Service area</p>
+            {/* On /service-area the page heading already said this — don't
+                stack two identical eyebrows. */}
+            {!compact && <p className="eyebrow text-cyan">Service area</p>}
             <h2 className="mt-3 font-display text-[clamp(2rem,5vw,3.1rem)] font-black italic leading-[0.98] tracking-[-0.03em]">
               If you can see pine
               <br className="hidden sm:block" /> trees, he&rsquo;ll come.
