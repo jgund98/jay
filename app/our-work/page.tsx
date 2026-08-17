@@ -85,6 +85,14 @@ const shots = [
     tag: "Diagnostics",
     ratio: "aspect-[4/3]",
   },
+  {
+    src: "/img/svc-suspension.jpg",
+    alt: "Suspension components seen from underneath a vehicle during inspection",
+    caption:
+      "Hands on every joint with the weight off the wheel. Parts that are still good stay on the car.",
+    tag: "Suspension",
+    ratio: "aspect-[4/3]",
+  },
 ];
 
 export default function OurWorkPage() {
@@ -121,10 +129,13 @@ export default function OurWorkPage() {
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-carbon/85 via-transparent to-transparent" />
                     <span
-                      className={`absolute left-3 top-3 rounded-full px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.16em] backdrop-blur ${
+                      /* Solid dark chip, not a tint — one of these sits on a
+                         bright yellow shop towel and a translucent badge
+                         disappears into it. */
+                      className={`absolute left-3 top-3 rounded-full px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.16em] ${
                         s.real
-                          ? "bg-cyan/22 text-cyan"
-                          : "bg-carbon/60 text-chrome/55"
+                          ? "bg-carbon/85 text-cyan ring-1 ring-cyan/40"
+                          : "bg-carbon/75 text-chrome/70"
                       }`}
                     >
                       {s.real ? `${site.ownerShort}'s photo` : s.tag}

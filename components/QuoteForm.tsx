@@ -219,7 +219,7 @@ export default function QuoteForm({ prefillIssue }: { prefillIssue?: string }) {
                   ))}
                 </div>
 
-                <Field label="Year, make and model (if you know it)" optional>
+                <Field label="Year, make and model" optional>
                   <input
                     value={data.vehicle}
                     onChange={(e) =>

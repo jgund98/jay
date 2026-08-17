@@ -7,6 +7,7 @@
  * territory Jay actually covers.
  */
 
+import { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { site } from "@/lib/site";
 
@@ -57,6 +58,16 @@ export default function ServiceArea({ compact = false }: { compact?: boolean }) 
   const hub = TOWNS[0];
   const hx = px(hub.lng);
   const hy = py(hub.lat);
+  const scroller = useRef<HTMLDivElement>(null);
+
+  /* When the map has to scroll on a phone, open it centred on Conroe rather
+     than pinned to Anderson at the far western edge. */
+  useEffect(() => {
+    const el = scroller.current;
+    if (!el) return;
+    const extra = el.scrollWidth - el.clientWidth;
+    if (extra > 0) el.scrollLeft = extra * (hx / W) * 1.15;
+  }, [hx]);
 
   return (
     <section className="relative overflow-hidden bg-carbon py-20 sm:py-24">
@@ -98,7 +109,15 @@ export default function ServiceArea({ compact = false }: { compact?: boolean }) 
             )}
           </div>
 
-          <div className="relative">
+          {/* The map is plotted from real coordinates, so it can't just shrink —
+              at phone width the town names turn to dust. Below sm it keeps a
+              legible minimum width and swipes sideways instead; vertical
+              scrolling is untouched. */}
+          <div
+            ref={scroller}
+            className="no-scrollbar relative -mx-4 overflow-x-auto px-4 sm:mx-0 sm:overflow-visible sm:px-0"
+          >
+            <div className="min-w-[620px] sm:min-w-0">
             <svg
               viewBox={`0 0 ${W} ${H}`}
               className="w-full"
@@ -217,7 +236,11 @@ export default function ServiceArea({ compact = false }: { compact?: boolean }) 
                 BASE
               </text>
             </svg>
+            </div>
           </div>
+          <p className="mt-2 text-center font-mono text-[11px] uppercase tracking-[0.2em] text-chrome/30 sm:hidden">
+            Swipe the map →
+          </p>
         </div>
       </div>
     </section>
