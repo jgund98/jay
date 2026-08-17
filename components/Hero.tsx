@@ -215,7 +215,7 @@ export default function Hero() {
                 </div>
               ))}
             </div>
-            <div className="pointer-events-none absolute inset-y-0 left-0 w-10 bg-gradient-to-r from-carbon-2 to-transparent" />
+            <div className="pointer-events-none absolute inset-y-0 left-0 w-20 bg-gradient-to-r from-carbon-2 via-carbon-2/85 to-transparent" />
             <div className="pointer-events-none absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-carbon-2 to-transparent" />
           </div>
         </div>
