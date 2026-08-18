@@ -5,6 +5,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import MobileDock from "@/components/MobileDock";
 import OwnerPopup from "@/components/OwnerPopup";
+import PreviewOverlay from "@/components/PreviewOverlay";
 import { site, allCities, services } from "@/lib/site";
 
 const inter = Inter({
@@ -150,6 +151,7 @@ export default function RootLayout({
         <Footer />
         <MobileDock />
         <OwnerPopup />
+        <PreviewOverlay />
       </body>
     </html>
   );
