@@ -93,8 +93,8 @@ export default function Hero() {
         >
           <div className="relative h-[46svh] min-h-[240px] overflow-hidden rounded-2xl border border-violet-soft/18 sm:h-[52svh] lg:h-full lg:rounded-[20px]">
             <Image
-              src="/img/hero-diag.jpg"
-              alt="A professional diagnostic scan tool plugged into a vehicle during a mobile service call"
+              src="/img/hero-scan.jpg"
+              alt="A diagnostic scan tool plugged into a car's OBD port under the dash, its indicator glowing"
               fill
               priority
               sizes="(max-width: 1023px) 100vw, 48vw"

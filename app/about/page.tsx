@@ -111,8 +111,8 @@ export default function AboutPage() {
                 <div className="relative overflow-hidden rounded-2xl border border-violet-soft/20">
                   <div className="relative aspect-[4/3]">
                     <Image
-                      src="/img/real-card.jpg"
-                      alt={`${site.owner}'s business card`}
+                      src="/img/about-bench.jpg"
+                      alt="A workshop pegboard hung with wrenches, pliers and hand tools"
                       fill
                       sizes="(max-width:1023px) 100vw, 44vw"
                       className="object-cover"

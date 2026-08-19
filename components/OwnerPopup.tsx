@@ -81,17 +81,15 @@ export default function OwnerPopup() {
               </svg>
             </button>
 
-            {/* Contain, not cover — the whole point is that you can read the
-                number on the card. */}
-            <div className="relative h-[200px] w-full bg-carbon-3/60 pt-4">
+            <div className="relative h-[190px] w-full">
               <Image
-                src="/img/real-card.jpg"
-                alt={`${site.owner}'s business card`}
+                src="/img/popup-tools.jpg"
+                alt="A professional socket and wrench set laid out in its case"
                 fill
                 sizes="430px"
-                className="object-contain object-top px-5"
+                className="object-cover object-center"
               />
-              <div className="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-carbon-2 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-carbon-2 via-carbon-2/30 to-transparent" />
             </div>
 
             <div className="-mt-6 px-6 pb-6">
@@ -100,9 +98,9 @@ export default function OwnerPopup() {
                 Talk to {site.ownerShort} directly.
               </h3>
               <p className="mt-2.5 text-[15px] leading-relaxed text-chrome/65">
-                No call center, no service advisor, no runaround. The number on
-                that card is {site.owner}&rsquo;s, and he&rsquo;s the one who
-                answers it and the one who does the work.
+                No call center, no service advisor, no runaround. That number
+                rings {site.owner}&rsquo;s own phone, and he or his partner{" "}
+                {site.partnerFirst} is the one who shows up and does the work.
               </p>
 
               <div className="mt-5 grid gap-2.5">

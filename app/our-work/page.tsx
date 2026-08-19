@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 };
 
 /*
- * ⚠️ JORDAN: the four images marked `real: true` are Jay's own photos off his
+ * ⚠️ JORDAN: only the two marked `real: true` are Jay's own photos, off his
  * Google profile. Everything else is illustrative. The moment Jay sends a
  * batch from his phone, swap the rest out — this page gets twice as strong.
  */
@@ -54,12 +54,11 @@ const shots = [
     ratio: "aspect-[4/3]",
   },
   {
-    src: "/img/real-card.jpg",
-    alt: `${site.owner}'s business card on a yellow shop towel`,
+    src: "/img/work-tools.jpg",
+    alt: "Wrenches and sockets laid out in a truck-bed tool box",
     caption:
-      "The card he hands people. That number rings his phone, not an office.",
-    tag: "The card",
-    real: true,
+      "Everything the job needs travels in the truck — no \"we'll have to order that and book you back in\".",
+    tag: "In the truck",
     ratio: "aspect-[4/3]",
   },
   {
@@ -129,9 +128,8 @@ export default function OurWorkPage() {
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-carbon/85 via-transparent to-transparent" />
                     <span
-                      /* Solid dark chip, not a tint — one of these sits on a
-                         bright yellow shop towel and a translucent badge
-                         disappears into it. */
+                      /* Solid dark chip, not a tint — these sit on bright
+                         photos where a translucent badge would disappear. */
                       className={`absolute left-3 top-3 rounded-full px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.16em] ${
                         s.real
                           ? "bg-carbon/85 text-cyan ring-1 ring-cyan/40"

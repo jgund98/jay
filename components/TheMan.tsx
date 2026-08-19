@@ -5,12 +5,13 @@ import Reveal from "./Reveal";
 import { GCMark } from "./Logo";
 
 /*
- * The owner section. There is no photograph of Jay anywhere public — so
- * rather than borrow a stranger's face, this leans on the thing he actually
- * hands people: his card, and one of his own jobs.
+ * The owner section. There is no photograph of Jay or Jason anywhere public,
+ * so rather than borrow a stranger's face this shows the job instead: an
+ * American pickup with the hood up, waiting on a mobile mechanic.
  *
- * ⚠️ JORDAN: get a real photo of Jay with his truck and swap it in here.
- * It's the single biggest upgrade left on this page.
+ * ⚠️ JORDAN: a real photo of Jay or Jason with their truck is the single
+ * biggest upgrade left on this page — and it would also settle Jay's
+ * "logo on the back of the shirt" request.
  */
 
 export default function TheMan() {
@@ -77,8 +78,8 @@ export default function TheMan() {
               <div className="relative overflow-hidden rounded-2xl border border-violet-soft/20">
                 <div className="relative aspect-[4/3]">
                   <Image
-                    src="/img/real-card.jpg"
-                    alt={`${site.owner}'s business card resting on a shop towel`}
+                    src="/img/owner-truck.jpg"
+                    alt="A pickup truck with the hood up in a parking lot, waiting on a mobile mechanic"
                     fill
                     sizes="(max-width:1023px) 100vw, 46vw"
                     className="object-cover"
