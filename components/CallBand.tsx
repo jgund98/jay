@@ -29,7 +29,7 @@ export default function CallBand({
           </h2>
           <p className="mt-4 max-w-[42ch] text-[16.5px] leading-relaxed text-chrome/65">
             {sub ??
-              `${site.owner} answers his own phone, ${site.hoursLong}. ${site.callOutFee} to come out, ${site.callOutNote}.`}
+              `${site.owner} answers his own phone, ${site.hoursLong}. The ${site.callOutFee} ${site.callOutLabel} is ${site.callOutNote}.`}
           </p>
           <div className="mt-7 flex flex-wrap gap-3">
             <a

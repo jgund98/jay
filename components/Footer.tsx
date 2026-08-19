@@ -21,8 +21,9 @@ export default function Footer() {
             </Link>
             <p className="mt-5 max-w-sm text-[15px] leading-relaxed text-chrome/60">
               Owner-operated mobile auto repair out of {site.baseCity}, Texas.{" "}
-              {site.owner} is a {site.aseYears}-year ASE certified technician who
-              brings the shop to your driveway.
+              {site.owner} is a {site.aseYears}-year ASE certified technician;
+              his partner {site.partner} is a {site.partnerRole}. Between them
+              they bring the shop to your driveway.
             </p>
 
             <div className="mt-6 flex flex-wrap items-center gap-3">

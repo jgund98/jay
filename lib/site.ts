@@ -33,12 +33,20 @@ export const site = {
   aseYears: 25,
   aseCertified: true,
 
-  // ⚠️ JORDAN: confirm this number with Jay before launch.
-  // Source: Jay's own public Facebook post — "we are a Mobile Mechanic
-  // service, which runs 35$ and does come off bill."
-  // One of his GMB graphics advertises a $115 diagnostic instead.
-  callOutFee: "$35",
-  callOutNote: "and it comes off your bill",
+  // Jason came on 2026-08 as a partner. Jay called him a "small partner",
+  // so Jay stays the face of the business and Jason is introduced as the
+  // second technician who also answers the phone and runs calls.
+  // ⚠️ Jay said "certified technician" — NOT confirmed as ASE, so the site
+  // never says ASE about Jason. Confirm before changing this.
+  partner: "Jason Garcia",
+  partnerFirst: "Jason",
+  partnerRole: "certified technician",
+
+  // Confirmed by Jay 2026-08-19: $125 diagnostic, waived outright when the
+  // customer has the repair done. Every mention on the site reads from here.
+  callOutFee: "$125",
+  callOutLabel: "diagnostic",
+  callOutNote: "waived when you have the repair done",
 
   // Hub — Google Business Profile coordinates
   geo: { lat: 30.1446161, lng: -95.5052515 },
@@ -132,7 +140,7 @@ export const services: Service[] = [
     faqs: [
       {
         q: "How much does a mobile diagnostic cost in Conroe?",
-        a: "It's $35 for Jay to come out to you, and that $35 comes off your bill when you have the work done. Call (832) 528-0270 and he'll tell you what the repair itself runs before he starts.",
+        a: "The diagnostic is $125, and it is waived entirely when you have the repair done. Call (832) 528-0270 and Jay or Jason will tell you what the repair itself runs before anyone starts.",
       },
       {
         q: "Can you diagnose a car that won't start at all?",
@@ -394,7 +402,7 @@ export const services: Service[] = [
     faqs: [
       {
         q: "How much is a mobile A/C recharge?",
-        a: "It depends on what's leaking and how much refrigerant the system holds. The $35 call-out gets Jay there with gauges on it, and that comes off the bill.",
+        a: "It depends on what's leaking and how much refrigerant the system holds. The $125 diagnostic gets gauges on it and a straight answer — and it is waived when you have the repair done.",
       },
       {
         q: "Why is my A/C cold on the highway but warm at stoplights?",

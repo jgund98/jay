@@ -71,7 +71,7 @@ export default function ServicesPage() {
 
       <CallBand
         heading="Not sure which one you need?"
-        sub={`That's normal, and it's the entire point of the ${site.callOutFee} call-out. Describe the noise, ${site.owner} will tell you what it usually is before he ever gets in the truck.`}
+        sub={`That's normal, and it's the entire point of the ${site.callOutFee} ${site.callOutLabel} — which is ${site.callOutNote}. Describe the noise and ${site.owner} will tell you what it usually is before anyone gets in the truck.`}
       />
     </>
   );

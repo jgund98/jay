@@ -80,10 +80,13 @@ const localBusiness = {
   alternateName: site.name,
   url: site.url,
   telephone: site.phoneRaw,
-  description: `Mobile auto repair and diagnostics serving Conroe, Montgomery, Spring, Humble, Porter and Anderson, Texas. Owner-operated by ${site.owner}, ${site.aseYears}-year ASE certified technician.`,
+  description: `Mobile auto repair and diagnostics serving Conroe, Montgomery, Spring, Humble, Porter and Anderson, Texas. Owner-operated by ${site.owner}, a ${site.aseYears}-year ASE certified technician, with partner ${site.partner}.`,
   image: `${site.url}/img/logo-source.jpg`,
   priceRange: "$$",
-  founder: { "@type": "Person", name: site.owner },
+  founder: [
+    { "@type": "Person", name: site.owner },
+    { "@type": "Person", name: site.partner },
+  ],
   geo: {
     "@type": "GeoCoordinates",
     latitude: site.geo.lat,

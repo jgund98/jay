@@ -18,9 +18,9 @@ const shop = [
 
 const jay = [
   "He comes to your driveway, your office, your parking lot",
-  "You are the only car he is working on",
+  "Yours is the only car being worked on that visit",
   "You talk to the man holding the wrench",
-  `${site.callOutFee} to roll out, ${site.callOutNote}`,
+  `${site.callOutFee} ${site.callOutLabel}, ${site.callOutNote}`,
   "Photos of what he found, sent to your phone",
 ];
 

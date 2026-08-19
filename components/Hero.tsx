@@ -93,12 +93,12 @@ export default function Hero() {
         >
           <div className="relative h-[46svh] min-h-[240px] overflow-hidden rounded-2xl border border-violet-soft/18 sm:h-[52svh] lg:h-full lg:rounded-[20px]">
             <Image
-              src="/img/hero-hood.jpg"
-              alt="Mobile mechanic working under the open hood of a car at a customer's home"
+              src="/img/hero-diag.jpg"
+              alt="A professional diagnostic scan tool plugged into a vehicle during a mobile service call"
               fill
               priority
               sizes="(max-width: 1023px) 100vw, 48vw"
-              className="object-cover object-[62%_center]"
+              className="object-cover object-center"
             />
             {/* brand grade */}
             <div className="absolute inset-0 bg-gradient-to-tr from-violet-deep/55 via-transparent to-cyan/12 mix-blend-color" />
@@ -179,7 +179,7 @@ export default function Hero() {
               <b className="font-display font-bold text-chrome">
                 {site.callOutFee}
               </b>{" "}
-              to roll out — {site.callOutNote}
+              {site.callOutLabel} — {site.callOutNote}
             </span>
           </motion.div>
         </div>

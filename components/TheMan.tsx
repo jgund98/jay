@@ -27,20 +27,26 @@ export default function TheMan() {
       <div className="relative mx-auto max-w-[1240px] px-4 sm:px-6">
         <div className="grid gap-12 lg:grid-cols-[1.06fr_0.94fr] lg:items-center lg:gap-16">
           <div>
-            <p className="eyebrow text-cyan">One man, one truck</p>
+            <p className="eyebrow text-cyan">Two techs, no middlemen</p>
             <h2 className="mt-3 font-display text-[clamp(2rem,5vw,3.1rem)] font-black italic leading-[0.98] tracking-[-0.03em]">
-              You get {site.owner}.
+              You get an owner.
               <br className="hidden sm:block" /> Every time.
             </h2>
             <div className="mt-6 space-y-4 text-[16.5px] leading-relaxed text-chrome/65">
               <p>
-                Twenty-five years, ASE certified, and no employees to hand your
-                car off to. The person who answers the phone is the person who
-                diagnoses it, the person who turns the wrench, and the person
-                whose name is on the truck.
+                Twenty-five years, ASE certified, and nobody in between. The
+                person who answers the phone is the person who diagnoses your
+                car, turns the wrench on it, and has his name on the truck.
               </p>
               <p>
-                That&rsquo;s the whole business model. It&rsquo;s also why he
+                {site.partner} came on as a partner this year — a{" "}
+                {site.partnerRole} who answers the phone too, runs his own
+                service calls and does the repairs. So there are two of them
+                now, and they are both owners. You still never get handed to a
+                stranger.
+              </p>
+              <p>
+                That&rsquo;s the whole business model. It&rsquo;s also why they
                 can afford to tell you a repair isn&rsquo;t worth doing —
                 there&rsquo;s no service advisor upstairs with a monthly number
                 to hit.
@@ -84,8 +90,8 @@ export default function TheMan() {
               <div className="mt-4 grid grid-cols-3 gap-3">
                 {[
                   [`${site.aseYears}`, "years, ASE certified"],
-                  [site.callOutFee, "to roll out, off your bill"],
-                  ["24/7", "he answers it himself"],
+                  [site.callOutFee, "diagnostic, waived with the repair"],
+                  ["24/7", "an owner answers, not an office"],
                 ].map(([big, small]) => (
                   <div
                     key={small}

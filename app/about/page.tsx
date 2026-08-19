@@ -10,7 +10,7 @@ import { site, reviews } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: `About ${site.owner} — ASE Certified Mobile Mechanic, Conroe TX`,
-  description: `${site.owner} has spent ${site.aseYears} years as an ASE certified technician. Game Changer Automotive is owner-operated: he answers the phone, he does the diagnosis, he turns the wrench. Conroe, Montgomery County and north Houston.`,
+  description: `${site.owner} has spent ${site.aseYears} years as an ASE certified technician, and partner ${site.partner} is a ${site.partnerRole}. Game Changer Automotive is owner-operated: an owner answers the phone, does the diagnosis and turns the wrench. Conroe, Montgomery County and north Houston.`,
   alternates: { canonical: "/about" },
 };
 
@@ -69,6 +69,15 @@ export default function AboutPage() {
                 won&rsquo;t leave until the repair is complete and correct —
                 honest, transparent and open about everything I do. That&rsquo;s
                 not a slogan; it&rsquo;s just how I was taught.
+              </p>
+              <p>
+                This year {site.partner} came on with me as a partner.
+                He&rsquo;s a {site.partnerRole}, he answers the phone the same
+                as I do, he runs his own service calls and he does the repairs.
+                If {site.partnerFirst} shows up instead of me, you&rsquo;re
+                still getting an owner who has to look you in the eye
+                afterwards — that was the whole point of bringing him in rather
+                than hiring somebody.
               </p>
               <p>
                 One more thing. I&rsquo;m disabled-owned, and everybody is
@@ -202,7 +211,7 @@ export default function AboutPage() {
 
       <CallBand
         heading="Talk to me, not a call center."
-        sub={`That number rings my phone, ${site.hoursLong}. ${site.callOutFee} to come out and it comes off your bill. — ${site.owner}`}
+        sub={`That number rings my phone, ${site.hoursLong}. The ${site.callOutFee} ${site.callOutLabel} is ${site.callOutNote}. — ${site.owner}`}
       />
     </>
   );
