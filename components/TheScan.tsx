@@ -401,8 +401,7 @@ export default function TheScan() {
         <p className="mx-auto mt-5 max-w-[52ch] text-center text-[13px] leading-relaxed text-chrome/35">
           Common causes, not a diagnosis. Nothing replaces putting a meter on
           your actual car — which is exactly what the {site.callOutFee}{" "}
-          {site.callOutLabel}
-          is for.
+          {site.callOutLabel} is for.
         </p>
       </div>
     </section>

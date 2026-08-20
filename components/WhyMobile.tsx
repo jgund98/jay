@@ -34,11 +34,11 @@ export default function WhyMobile() {
               <div className="relative">
                 <div className="relative aspect-[4/5] overflow-hidden rounded-2xl sm:aspect-[5/4] lg:aspect-[4/5]">
                   <Image
-                    src="/img/work-outdoor-engine.jpg"
-                    alt="A mechanic working under an open hood outdoors, away from any shop"
+                    src="/img/why-truck.jpg"
+                    alt="An American pickup parked outside with its hood up, being worked on where it sits"
                     fill
                     sizes="(max-width:1023px) 100vw, 42vw"
-                    className="object-cover object-[58%_center]"
+                    className="object-cover object-center"
                   />
                 </div>
                 {/* the real job photo, overlapping — proof, not decoration */}
