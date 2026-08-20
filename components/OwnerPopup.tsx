@@ -95,12 +95,13 @@ export default function OwnerPopup() {
             <div className="-mt-6 px-6 pb-6">
               <Stars value={site.rating} className="h-4" />
               <h3 className="mt-3 font-display text-[26px] font-extrabold leading-tight">
-                Talk to {site.ownerShort} directly.
+                Talk to the mechanic, not a middleman.
               </h3>
               <p className="mt-2.5 text-[15px] leading-relaxed text-chrome/65">
                 No call center, no service advisor, no runaround. That number
-                rings {site.owner}&rsquo;s own phone, and he or his partner{" "}
-                {site.partnerFirst} is the one who shows up and does the work.
+                rings a real cell phone, not a front desk &mdash; and whoever
+                picks up, {site.ownerShort} or his partner, is the same person
+                pulling into your driveway with the tools.
               </p>
 
               <div className="mt-5 grid gap-2.5">
