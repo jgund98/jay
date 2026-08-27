@@ -21,7 +21,8 @@ export default function Footer() {
             </Link>
             <p className="mt-5 max-w-sm text-[15px] leading-relaxed text-chrome/60">
               Owner-operated mobile auto repair out of {site.baseCity}, Texas.{" "}
-              {site.owner} is a {site.aseYears}-year ASE certified technician;
+              {site.owner} is a {site.aseYears}-year ASE certified master technician,
+              dealer certified on Ford, GM and Chrysler diesel;
               his partner {site.partner} is a {site.partnerRole}. Between them
               they bring the shop to your driveway.
             </p>

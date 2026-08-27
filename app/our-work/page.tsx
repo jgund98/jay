@@ -13,19 +13,40 @@ export const metadata: Metadata = {
 };
 
 /*
- * ⚠️ JORDAN: only the two marked `real: true` are Jay's own photos, off his
- * Google profile. Everything else is illustrative. The moment Jay sends a
- * batch from his phone, swap the rest out — this page gets twice as strong.
+ * Eight of these nine are Jay's own photos, pulled from his Google profile
+ * and his Facebook page — the marked-up filters, the 51.9° vent reading, the
+ * transmission clutch packs. They carry a "Jay's photo" badge.
+ *
+ * That badge is load-bearing: only set `real: true` on a photo he actually
+ * took. The last one is stock and is deliberately unbadged.
  */
 const shots = [
   {
     src: "/img/real-timing-belt.jpg",
     alt: "Timing belt, tensioner and cam pulleys exposed on a Honda engine under a work light",
     caption:
-      "Timing belt service on a Honda. Belt, tensioner, idlers and water pump replaced together — the pump is right there once the belt is off.",
+      "Timing belt service. Belt, tensioner, idlers and water pump replaced together — the pump is right there once the belt is off, and doing it later means paying that labor twice.",
     tag: "Timing & cooling",
     real: true,
     span: "lg:col-span-2 lg:row-span-2",
+    ratio: "aspect-[3/4]",
+  },
+  {
+    src: "/img/real-cabin-filter.jpg",
+    alt: "A filthy cabin air filter labelled in red marker",
+    caption:
+      "Labelled it and sent the photo. You should not have to take anyone's word for what came out of your car.",
+    tag: "Diagnosis",
+    real: true,
+    ratio: "aspect-[4/3]",
+  },
+  {
+    src: "/img/real-ac-temp.jpg",
+    alt: "An infrared thermometer reading 51.9°F at a dashboard vent with the A/C on max",
+    caption:
+      "51.9° at the vent on max. That is what a working A/C reads — and it is how you prove it, instead of guessing at the charge.",
+    tag: "A/C",
+    real: true,
     ratio: "aspect-[3/4]",
   },
   {
@@ -38,42 +59,39 @@ const shots = [
     ratio: "aspect-[3/4]",
   },
   {
-    src: "/img/scan-tablet-b.jpg",
-    alt: "A technician holding a diagnostic scan tool in a vehicle cabin",
+    src: "/img/real-trans-clutches.jpg",
+    alt: "Transmission clutch packs and steels laid out on a bench",
     caption:
-      "Live data while the fault is actually happening. That's the part a code reader can't do.",
-    tag: "Diagnostics",
+      "Clutch packs out and laid in order. Not everything is a bolt-on — 25 years is what lets him take one of these on.",
+    tag: "Drivetrain",
+    real: true,
+    ratio: "aspect-[3/4]",
+  },
+  {
+    src: "/img/real-pan.jpg",
+    alt: "An oil pan marked up in red to show where the leak was",
+    caption:
+      "Marked up so you can see exactly where it was leaking from before you spend a dollar on it.",
+    tag: "Leaks",
+    real: true,
     ratio: "aspect-[4/3]",
   },
   {
-    src: "/img/svc-brakes-hands.jpg",
-    alt: "Hands working on a brake rotor and hub with the wheel removed",
+    src: "/img/real-o2-sensor.jpg",
+    alt: "An oxygen sensor and catalytic converter laid out on the driveway",
     caption:
-      "Wheel off, rotor measured, pad thickness photographed — before anything gets ordered.",
-    tag: "Brakes",
-    ratio: "aspect-[4/3]",
+      "Oxygen sensor and converter, done on the driveway. No lift, no tow, no day off work.",
+    tag: "Emissions",
+    real: true,
+    ratio: "aspect-[3/4]",
   },
   {
-    src: "/img/work-tools.jpg",
-    alt: "Wrenches and sockets laid out in a truck-bed tool box",
+    src: "/img/real-evap.jpg",
+    alt: "A fuel system component circled in marker during a leak diagnosis",
     caption:
-      "Everything the job needs travels in the truck — no \"we'll have to order that and book you back in\".",
-    tag: "In the truck",
-    ratio: "aspect-[4/3]",
-  },
-  {
-    src: "/img/work-hands-engine.jpg",
-    alt: "Close-up of hands working on an engine bay outdoors",
-    caption: "Engine bay work, done where the car already is.",
-    tag: "General repair",
-    ratio: "aspect-[4/3]",
-  },
-  {
-    src: "/img/svc-wheel-off.jpg",
-    alt: "A car with the wheel removed showing the brake disc during a driveway repair",
-    caption:
-      "No lift needed. A jack, stands, the right torque spec and someone who's done it a few thousand times.",
-    tag: "Brakes",
+      "Circled at the source. Half the money wasted on car repair gets wasted guessing at exactly this.",
+    tag: "Diagnosis",
+    real: true,
     ratio: "aspect-[4/3]",
   },
   {
@@ -82,14 +100,6 @@ const shots = [
     caption:
       "Every module gets pulled — engine, transmission, ABS, body. Not just the one that turned the light on.",
     tag: "Diagnostics",
-    ratio: "aspect-[4/3]",
-  },
-  {
-    src: "/img/svc-suspension.jpg",
-    alt: "Suspension components seen from underneath a vehicle during inspection",
-    caption:
-      "Hands on every joint with the weight off the wheel. Parts that are still good stay on the car.",
-    tag: "Suspension",
     ratio: "aspect-[4/3]",
   },
 ];

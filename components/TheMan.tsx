@@ -35,9 +35,15 @@ export default function TheMan() {
             </h2>
             <div className="mt-6 space-y-4 text-[16.5px] leading-relaxed text-chrome/65">
               <p>
-                Twenty-five years, ASE certified, and nobody in between. The
-                person who answers the phone is the person who diagnoses your
-                car, turns the wrench on it, and has his name on the truck.
+                Twenty-five years, ASE certified master technician, and nobody
+                in between. The person who answers the phone is the person who
+                diagnoses your car, turns the wrench on it, and has his name on
+                the truck.
+              </p>
+              <p>
+                Gas and diesel both, and dealer certified on Ford, GM and
+                Chrysler diesel — so the work truck that pays your bills does
+                not have to go on a rollback to get looked at.
               </p>
               <p>
                 {site.partner} came on as a partner this year — a{" "}

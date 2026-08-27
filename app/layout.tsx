@@ -32,7 +32,7 @@ export const metadata: Metadata = {
     default: `Mobile Mechanic in Conroe & Montgomery County, TX | ${site.name}`,
     template: `%s | ${site.name}`,
   },
-  description: `${site.name} is a mobile auto repair and diagnostics service run by ${site.owner}, a ${site.aseYears}-year ASE certified technician. We come to you in Conroe, Montgomery, Spring, Humble, Porter and Anderson. Open 24 hours. Call ${site.phone}.`,
+  description: `${site.name} is a mobile auto repair and diagnostics service run by ${site.owner}, a ${site.aseYears}-year ASE certified master technician working on gas and diesel. We come to you in Conroe, Montgomery, Spring, Humble, Porter and Anderson. Open 24 hours. Call ${site.phone}.`,
   keywords: [
     "mobile mechanic Conroe TX",
     "mobile auto repair Montgomery County",
@@ -41,6 +41,8 @@ export const metadata: Metadata = {
     "check engine light diagnosis Conroe",
     "mobile brake repair",
     "ASE certified mobile mechanic",
+    "mobile diesel mechanic Conroe",
+    "Powerstroke Duramax Cummins repair",
     "24 hour mechanic Conroe",
   ],
   openGraph: {
@@ -80,7 +82,7 @@ const localBusiness = {
   alternateName: site.name,
   url: site.url,
   telephone: site.phoneRaw,
-  description: `Mobile auto repair and diagnostics serving Conroe, Montgomery, Spring, Humble, Porter and Anderson, Texas. Owner-operated by ${site.owner}, a ${site.aseYears}-year ASE certified technician, with partner ${site.partner}.`,
+  description: `Mobile auto repair and diagnostics serving Conroe, Montgomery, Spring, Humble, Porter and Anderson, Texas. Owner-operated by ${site.owner}, a ${site.aseYears}-year ASE certified master technician, dealer certified on Ford, GM and Chrysler diesel, with partner ${site.partner}.`,
   image: `${site.url}/img/logo-source.jpg`,
   priceRange: "$$",
   founder: [

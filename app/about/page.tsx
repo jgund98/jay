@@ -10,7 +10,7 @@ import { site, reviews } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: `About ${site.owner} — ASE Certified Mobile Mechanic, Conroe TX`,
-  description: `${site.owner} has spent ${site.aseYears} years as an ASE certified technician, and partner ${site.partner} is a ${site.partnerRole}. Game Changer Automotive is owner-operated: an owner answers the phone, does the diagnosis and turns the wrench. Conroe, Montgomery County and north Houston.`,
+  description: `${site.owner} has spent ${site.aseYears} years as an ASE certified master technician working on gas and diesel, dealer certified on Ford, GM and Chrysler diesel, and partner ${site.partner} is a ${site.partnerRole}. Game Changer Automotive is owner-operated: an owner answers the phone, does the diagnosis and turns the wrench. Conroe, Montgomery County and north Houston.`,
   alternates: { canonical: "/about" },
 };
 
@@ -40,7 +40,7 @@ export default function AboutPage() {
                 {site.ownerNickname.replace(`${site.ownerShort} the `, "")}
                 &mdash;{" "}
                 <span className="italic">{site.ownerNickname}</span>. I&rsquo;ve
-                been an ASE certified technician for {site.aseYears} years, and
+                been a master technician for {site.aseYears} years, gas and diesel, and
                 Game Changer Automotive is me, my tools and my truck.
               </p>
               <p>
@@ -59,6 +59,13 @@ export default function AboutPage() {
                 that&rsquo;s where it quit. I bring the scan tools, the meters
                 and the hand tools, and I work on your car and nobody
                 else&rsquo;s until it&rsquo;s done.
+              </p>
+              <p>
+                I work on gas and diesel both, and I&rsquo;m dealer certified on
+                Ford, GM and Chrysler diesel. That matters out here. A lot of
+                people in Montgomery County make their living out of a work
+                truck, and putting one of those on a rollback to go sit in a
+                shop line costs more than the repair does.
               </p>
               <p>
                 I&rsquo;m going to tell you the truth about what I find, even
@@ -90,8 +97,8 @@ export default function AboutPage() {
                   {site.owner}
                 </p>
                 <p className="mt-2 text-[14px] text-chrome/45">
-                  Owner &amp; technician, Game Changer Automotive ·{" "}
-                  {site.aseYears} years ASE certified
+                  Owner &amp; master technician, Game Changer Automotive ·{" "}
+                  {site.aseYears} years · gas &amp; diesel
                 </p>
               </div>
 

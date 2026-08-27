@@ -7,11 +7,12 @@ import Reviews from "@/components/Reviews";
 import ServiceArea from "@/components/ServiceArea";
 import CallBand from "@/components/CallBand";
 import TheMan from "@/components/TheMan";
+import WhoShowsUp from "@/components/WhoShowsUp";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: `Mobile Mechanic in Conroe & Montgomery County, TX | ${site.name}`,
-  description: `${site.owner} brings ${site.aseYears} years of ASE certified auto repair to your driveway in Conroe, Montgomery, Spring, Humble, Porter and Anderson. Diagnostics, brakes, suspension, electrical and A/C. Open 24 hours — ${site.phone}.`,
+  description: `${site.owner} brings ${site.aseYears} years of ASE certified auto repair to your driveway in Conroe, Montgomery, Spring, Humble, Porter and Anderson. Gas and diesel: diagnostics, brakes, suspension, electrical, A/C and Powerstroke, Duramax and Cummins work. Open 24 hours — ${site.phone}.`,
   alternates: { canonical: "/" },
 };
 
@@ -19,6 +20,7 @@ export default function Home() {
   return (
     <>
       <Hero />
+      <WhoShowsUp />
       <TheScan />
       <WhyMobile />
       <ServicesGrid

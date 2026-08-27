@@ -38,6 +38,13 @@ export const site = {
   // second technician who also answers the phone and runs calls.
   // ⚠️ Jay said "certified technician" — NOT confirmed as ASE, so the site
   // never says ASE about Jason. Confirm before changing this.
+  // From Jay's own Facebook intro, verbatim: "I am a master technician I have
+  // been in the Auto repair industry 25+ years. I work on gas and diesel
+  // vehicles. I am dealer certified on Ford GM and Chrysler diesel."
+  masterTech: true,
+  doesDiesel: true,
+  dealerCerts: ["Ford", "GM", "Chrysler diesel"] as string[],
+
   partner: "Jason Garcia",
   partnerFirst: "Jason",
   partnerRole: "certified technician",
@@ -55,8 +62,11 @@ export const site = {
   regionName: "Texas",
   areaLabel: "Montgomery County & North Houston",
 
+  email: "gamechangerautomotive@gmail.com",
+  emailHref: "mailto:gamechangerautomotive@gmail.com",
+
   social: {
-    facebook: "https://www.facebook.com/search/top?q=game%20changer%20automotive",
+    facebook: "https://www.facebook.com/profile.php?id=61586678087911",
   },
 } as const;
 
@@ -162,6 +172,62 @@ export const services: Service[] = [
       "car computer diagnostic",
       "engine light on",
       "mobile mechanic diagnostic",
+    ],
+  },
+  {
+    slug: "diesel-repair",
+    name: "Diesel Repair & Diagnostics",
+    navName: "Diesel",
+    short: "Powerstroke, Duramax, Cummins",
+    blurb:
+      "Most mobile mechanics stop at gas engines. Jay is dealer certified on Ford, GM and Chrysler diesel, so the 6.7 in your driveway is not somebody else’s problem.",
+    image: "/img/scan-engine-tool.jpg",
+    imageAlt:
+      "A professional scan tool resting on a fender cover over an open engine bay",
+    symptoms: [
+      "Check engine light, limp mode or a regen that never finishes",
+      "Hard start, long crank or white smoke on a cold morning",
+      "Glow plug, injector or fuel pressure codes",
+      "Turbo whine, boost leak or loss of power under load",
+      "Coolant loss on a 6.0 or 6.4 Powerstroke",
+    ],
+    includes: [
+      "Manufacturer-level diesel scan — injector balance, fuel rail, EGT, DPF status",
+      "Glow plug and injector circuit testing",
+      "Fuel pressure and return testing",
+      "Turbo, boost leak and intercooler inspection",
+      "Photos of the finding, sent to your phone before anything is quoted",
+    ],
+    body: [
+      "Diesel is where the guessing gets expensive fast. A set of injectors on a Powerstroke is four figures before anybody touches a wrench, and a shop that throws them at a fuel code it did not actually test is spending your money to learn something.",
+      "Jay is dealer certified on Ford, GM and Chrysler diesel and has been doing this for twenty-five years. He pulls injector balance rates, checks fuel rail pressure and return, tests the glow plug circuit and looks at the turbo before anyone talks about parts.",
+      "That happens at your house or your job site. Trucks are the worst thing to be without and the most expensive thing to tow — so he brings the scan tool to the truck instead.",
+    ],
+    faqs: [
+      {
+        q: "Do you work on diesel trucks in Conroe and Montgomery County?",
+        a: "Yes. Jay works on gas and diesel and is dealer certified on Ford, GM and Chrysler diesel. Powerstroke, Duramax and Cummins are all regular calls.",
+      },
+      {
+        q: "Can a mobile mechanic really diagnose a diesel?",
+        a: "For diagnosis and most repairs, yes. He brings the same scan tools that read injector balance rates, fuel rail pressure and DPF status. The jobs that need a lift or an engine out are the ones he will tell you honestly belong in a shop.",
+      },
+      {
+        q: "My truck is in limp mode. Can you come out?",
+        a: "Call (832) 528-0270. Limp mode is almost always a stored code with a real cause behind it, and it is usually faster to read it where the truck sits than to pay for a tow first.",
+      },
+      {
+        q: "How much is a diesel diagnostic?",
+        a: "$125, the same as any other diagnostic, and it is waived when you have the repair done.",
+      },
+    ],
+    keywords: [
+      "diesel mechanic conroe",
+      "mobile diesel repair",
+      "powerstroke repair",
+      "duramax repair",
+      "cummins mechanic",
+      "diesel diagnostics montgomery county",
     ],
   },
   {
@@ -521,6 +587,63 @@ export const services: Service[] = [
       "mobile car inspection",
       "ppi mechanic",
     ],
+  },
+];
+
+/**
+ * The two owners.
+ *
+ * ⚠️ PHOTOS — READ THIS BEFORE SWAPPING THEM IN.
+ * `photo` is null on purpose. Jay asked for real pictures of himself and
+ * Jason on the front page, in his words so people "know who we are" and
+ * because "the whole website is AI so I want to make it real".
+ *
+ * The flyer images he sent are AI-generated, so putting those here would do
+ * the exact opposite of what he asked for — and if the face isn't really his,
+ * a customer who meets him has been misled. So the slots are empty until real
+ * photos arrive, and the card falls back to a branded monogram that looks
+ * deliberate rather than broken.
+ *
+ * TO FINISH: drop two photos in /public/img (e.g. jay.jpg, jason.jpg), set
+ * `photo` below, and you're done. Nothing else needs touching. A phone
+ * selfie in their work shirts beats any stock or AI image here.
+ */
+export type TeamMember = {
+  name: string;
+  first: string;
+  initials: string;
+  role: string;
+  credential: string;
+  blurb: string;
+  phone: string;
+  phoneHref: string;
+  photo: string | null;
+};
+
+export const team: TeamMember[] = [
+  {
+    name: "Jay Metcalf",
+    first: "Jay",
+    initials: "JM",
+    role: "Owner & master technician",
+    credential: "25 years · ASE certified · gas & diesel",
+    blurb:
+      "The one who answers the phone. Dealer certified on Ford, GM and Chrysler diesel, and the person who diagnoses your car, turns the wrench and stands behind it.",
+    phone: "(832) 528-0270",
+    phoneHref: "tel:+18325280270",
+    photo: null,
+  },
+  {
+    name: "Jason Garcia",
+    first: "Jason",
+    initials: "JG",
+    role: "Partner & technician",
+    credential: "Certified technician",
+    blurb:
+      "Came on as a partner this year. He answers the phone too, runs his own service calls and does the repairs — so whoever turns up, you get an owner.",
+    phone: "(832) 528-0270",
+    phoneHref: "tel:+18325280270",
+    photo: null,
   },
 ];
 

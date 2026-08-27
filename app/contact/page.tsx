@@ -92,7 +92,9 @@ export default function ContactPage() {
                   <div>
                     <dt className="eyebrow text-chrome/35">Credentials</dt>
                     <dd className="mt-1.5 text-chrome/70">
-                      {site.aseYears} years, ASE certified technician
+                      {site.aseYears} years, ASE certified master technician ·
+                      gas &amp; diesel · dealer certified Ford, GM and Chrysler
+                      diesel
                     </dd>
                   </div>
                 </dl>

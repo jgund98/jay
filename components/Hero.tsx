@@ -110,7 +110,7 @@ export default function Hero() {
                 {site.aseYears} Years
               </p>
               <p className="mt-1 text-[11.5px] leading-none text-chrome/60">
-                ASE Certified Technician
+                Master tech &middot; gas &amp; diesel
               </p>
             </div>
           </div>
@@ -125,9 +125,10 @@ export default function Hero() {
             variants={rise}
             className="max-w-[38ch] text-[17px] leading-relaxed text-chrome/70 sm:text-[18.5px]"
           >
-            {site.owner} has been fixing cars for {site.aseYears} years. He
-            brings the diagnostic tools, the parts and the torque wrench to your
-            driveway, so you never sit in a waiting room again.
+            {site.owner} has been fixing cars and trucks for {site.aseYears}{" "}
+            years, gas and diesel. He brings the diagnostic tools, the parts and
+            the torque wrench to your driveway, so you never sit in a waiting
+            room again.
           </motion.p>
 
           <motion.div
