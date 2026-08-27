@@ -9,10 +9,11 @@ import { Stagger, Item } from "./Reveal";
  * "Who actually shows up" — the section Jay asked for, so customers see who
  * is coming before they call.
  *
- * The portrait slot reads from `team[].photo` in lib/site.ts. While that's
- * null it renders a branded monogram instead of a stock face or an AI one,
- * which keeps the promise the copy makes. Setting `photo` swaps it with no
- * other change.
+ * The portraits read from `team[].photo` in lib/site.ts — real photographs
+ * of the two of them, cut out of the flyers Jay sent. If `photo` is ever
+ * null the card falls back to a branded monogram rather than a stock face,
+ * because a stranger's face here would break the only promise this section
+ * makes.
  */
 
 export default function WhoShowsUp() {
@@ -43,12 +44,12 @@ export default function WhoShowsUp() {
           {team.map((m) => (
             <Item key={m.name} className="h-full">
               <div className="edge-card group flex h-full flex-col overflow-hidden">
-                {/* A real photo gets a full 4:3 portrait. The monogram
-                    placeholder gets a short band instead — a tall block of
-                    gradient reads as a broken image, not a design. */}
+                {/* A real photo gets a 4:5 portrait — people read better
+                    tall. The monogram fallback gets a short band instead: a
+                    tall block of gradient looks like a broken image. */}
                 <div
                   className={`relative w-full overflow-hidden ${
-                    m.photo ? "aspect-[4/3]" : "h-[124px] sm:h-[140px]"
+                    m.photo ? "aspect-[4/5] sm:aspect-[4/4.4]" : "h-[124px] sm:h-[140px]"
                   }`}
                 >
                   {m.photo ? (
@@ -57,7 +58,7 @@ export default function WhoShowsUp() {
                       alt={`${m.name}, ${m.role} at ${site.name}`}
                       fill
                       sizes="(max-width:639px) 100vw, 50vw"
-                      className="object-cover object-top transition-transform duration-[900ms] group-hover:scale-[1.04]"
+                      className="object-cover object-[50%_12%] transition-transform duration-[900ms] group-hover:scale-[1.04]"
                     />
                   ) : (
                     /* Branded monogram, not a stock face — see lib/site.ts */

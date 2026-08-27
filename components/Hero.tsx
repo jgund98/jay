@@ -89,21 +89,25 @@ export default function Hero() {
           initial={{ opacity: 0, scale: 1.03 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.9, ease: EASE }}
-          className="relative [grid-area:media] lg:h-[min(74svh,620px)]"
+          className="relative [grid-area:media] lg:h-[min(62svh,520px)]"
         >
           <div className="relative h-[46svh] min-h-[240px] overflow-hidden rounded-2xl border border-violet-soft/18 sm:h-[52svh] lg:h-full lg:rounded-[20px]">
+            {/* Jay asked for this: "a real picture of myself and my partner
+                so people know who we are, they see my face." Both portraits
+                are cut from the shirts-and-truck flyers he sent. The brand
+                grade below is deliberately much lighter than it was on the
+                engine photo — a mix-blend-color at 55% turns skin purple. */}
             <Image
-              src="/img/hero-v8.jpg"
-              alt="A chrome-topped American V8 under an open hood"
+              src="/img/hero-team.jpg"
+              alt={`${site.owner} and ${site.partner} of ${site.name}, in Game Changer shirts`}
               fill
               priority
               sizes="(max-width: 1023px) 100vw, 48vw"
               className="object-cover object-center"
             />
-            {/* brand grade */}
-            <div className="absolute inset-0 bg-gradient-to-tr from-violet-deep/55 via-transparent to-cyan/12 mix-blend-color" />
-            <div className="absolute inset-0 bg-gradient-to-t from-carbon via-carbon/12 to-transparent" />
-            <div className="absolute inset-0 bg-gradient-to-r from-carbon/70 via-transparent to-transparent lg:from-carbon/45" />
+            <div className="absolute inset-0 bg-gradient-to-tr from-violet-deep/18 via-transparent to-transparent mix-blend-color" />
+            <div className="absolute inset-0 bg-gradient-to-t from-carbon/60 via-carbon/5 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-r from-carbon/35 via-transparent to-transparent lg:from-carbon/20" />
 
             <div className="absolute bottom-3 right-3 rounded-xl border border-white/15 bg-carbon/72 px-3.5 py-2.5 backdrop-blur-md">
               <p className="font-display text-[13px] font-extrabold uppercase leading-none tracking-wide text-cyan">

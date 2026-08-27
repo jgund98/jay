@@ -36,29 +36,40 @@ Common edits:
 
 ---
 
-## 2. Adding real photos of Jay and Jason (do this first)
+## 2. The photos of Jay and Jason
 
-The **"Who shows up"** section on the home page currently draws a branded
-monogram (JM / JG) instead of a face. That is a placeholder, not a design
-choice — a real photo is strictly better and Jay has asked for one.
+Jay sent over two promotional flyers and asked for his and Jason's faces on
+the front page: *"people know who we are, they see my face."* The flyer
+**artwork** — lightning, logo, headline — is AI-generated, but the **men in it
+are photographs**, so that is where the portraits come from.
 
-1. Get a phone photo of each of them. Ideally in a Game Changer shirt, next to
-   the truck, outdoors, daylight. Portrait or square.
-2. Drop them in `public/img/` as `jay.jpg` and `jason.jpg`.
-3. In `lib/site.ts`, in the `team` array, change `photo: null` to
-   `photo: "/img/jay.jpg"` (and the same for Jason).
+They appear in two places:
 
-That is the whole change. The card swaps from monogram to photo automatically.
+| Asset | Where |
+|---|---|
+| `public/img/hero-team.jpg` | the home-page hero, both of them side by side |
+| `public/img/jay.jpg`, `public/img/jason.jpg` | the "Who shows up" cards, via `team[].photo` in `lib/site.ts` |
 
-> **Do not use AI-generated portraits here.** Jay's stated reason for wanting
-> photos is *"the whole website is AI so I want to make it real."* A generated
-> face defeats that, and a customer who meets him has been misled. The slot
-> stays a monogram until real photos exist.
+`scripts/extract-people.sh` regenerates all three from the two source flyers
+(`scripts/jay-src.jpg`, `scripts/jason-src.jpg`) and documents every crop, so
+you can re-frame without redoing the work by hand. Two numbers in there are
+load-bearing:
+
+- Jay's crop is **208px** wide, not 215 — at 215 it catches the magenta edge of
+  the flyer's "FAST. CONVENIENT. RELIABLE." bar.
+- The hero canvas is **1200x1040**, matching the hero panel's aspect ratio. Make
+  it wider and `object-cover` starts slicing both men off at the edges.
+
+If Jay and Jason ever send straight phone photos, prefer those — drop them in
+`public/img` under new filenames and repoint `photo` in `lib/site.ts`.
+**Never substitute a stock or generated face.** The entire point of that
+section is that these are the two people who actually turn up.
 
 ### Image rules that were set by the client
 
 - **No people in stock photos.** Jay rejected every bib-overall stock mechanic.
-  Any stock image must be car-only.
+  Any stock image must be car-only. (Photos of Jay and Jason themselves are of
+  course the exception, and the goal.)
 - **Must read as American.** No European cars, plates, or streets.
 - **No business-card photo.** It was mistaken for a job photo and is banned.
 - The `Jay's photo` badge on `/our-work` (`real: true`) may only be set on a
@@ -67,21 +78,24 @@ That is the whole change. The card swaps from monogram to photo automatically.
   **new** filename, or the old picture keeps being served after a rebuild.
   Locally also `rm -rf .next/cache/images`.
 
----
-
 ## 3. Open items
 
-1. **`/api/quote` is a stub.** It `console.log`s and returns 200. Quote-form
+1. **Jason's phone number needs one word from Jay.** His flyer prints
+   **+1 (936) 405-2838**, which is very likely his own line, but nobody has
+   confirmed it. Until then both team cards dial Jay's number and Jason's
+   button shows the number rather than "Call Jason". Confirm it, add it to his
+   entry in `team`, and the button relabels itself.
+2. **`/api/quote` is a stub.** It `console.log`s and returns 200. Quote-form
    leads currently go nowhere. Wire the Brevo drop-in from
    `epic/client-email-protocol` plus an SMS to Jay before pointing any paid
    traffic at the form. Phone and text links work fine today — those are the
    live lead paths.
-2. **Jason's phone number is unconfirmed.** Both team cards call Jay's line.
-   If Jason has his own number, add it to his entry in `team`.
 3. **Jason's ASE status is unconfirmed.** The site calls him a "certified
    technician" and deliberately never says ASE about him. Do not upgrade that
    claim without confirming it.
-4. **No photo of Jay or Jason** — see section 2.
+4. **Jason's flyer also claims "25 YEAR ASE CERTIFIED"** — that is almost
+   certainly the template copied from Jay's version, so the site does not
+   repeat it. Do not promote Jason's credential without asking.
 
 ---
 

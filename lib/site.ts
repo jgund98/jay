@@ -593,20 +593,18 @@ export const services: Service[] = [
 /**
  * The two owners.
  *
- * ⚠️ PHOTOS — READ THIS BEFORE SWAPPING THEM IN.
- * `photo` is null on purpose. Jay asked for real pictures of himself and
- * Jason on the front page, in his words so people "know who we are" and
- * because "the whole website is AI so I want to make it real".
+ * PHOTOS. `jay.jpg` and `jason.jpg` are cut from the two promotional flyers
+ * Jay sent over. The flyer artwork around them — the lightning, the logo, the
+ * headline — is AI-generated, but the men in it are photographs of Jay and
+ * Jason in their Game Changer shirts, which is exactly what Jay asked for:
+ * "a real picture of myself and my partner ... people see my face".
+ * `scripts/extract-people.sh` records the exact ffmpeg crops, so they can be
+ * regenerated or re-cropped without going back to the flyers by hand.
  *
- * The flyer images he sent are AI-generated, so putting those here would do
- * the exact opposite of what he asked for — and if the face isn't really his,
- * a customer who meets him has been misled. So the slots are empty until real
- * photos arrive, and the card falls back to a branded monogram that looks
- * deliberate rather than broken.
- *
- * TO FINISH: drop two photos in /public/img (e.g. jay.jpg, jason.jpg), set
- * `photo` below, and you're done. Nothing else needs touching. A phone
- * selfie in their work shirts beats any stock or AI image here.
+ * If they ever send straight phone photos, prefer those: drop them in
+ * /public/img and repoint `photo` below. Nothing else needs touching.
+ * Never substitute a stock face or a generated one — the whole point of this
+ * section is that these are the actual two people who show up.
  */
 export type TeamMember = {
   name: string;
@@ -631,7 +629,7 @@ export const team: TeamMember[] = [
       "The one who answers the phone. Dealer certified on Ford, GM and Chrysler diesel, and the person who diagnoses your car, turns the wrench and stands behind it.",
     phone: "(832) 528-0270",
     phoneHref: "tel:+18325280270",
-    photo: null,
+    photo: "/img/jay.jpg",
   },
   {
     name: "Jason Garcia",
@@ -643,7 +641,7 @@ export const team: TeamMember[] = [
       "Came on as a partner this year. He answers the phone too, runs his own service calls and does the repairs — so whoever turns up, you get an owner.",
     phone: "(832) 528-0270",
     phoneHref: "tel:+18325280270",
-    photo: null,
+    photo: "/img/jason.jpg",
   },
 ];
 
