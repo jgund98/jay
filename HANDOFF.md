@@ -39,31 +39,39 @@ Common edits:
 ## 2. The photos of Jay and Jason
 
 Jay sent over two promotional flyers and asked for his and Jason's faces on
-the front page: *"people know who we are, they see my face."* The flyer
-**artwork** — lightning, logo, headline — is AI-generated, but the **men in it
-are photographs**, so that is where the portraits come from.
+the site. The flyer **artwork** — lightning, logo, headline — is AI-generated,
+but the **men in it are photographs**, so that is where the portraits come
+from.
 
-They appear in two places:
+They appear in exactly one place: the **"Who shows up"** cards on the home
+page, via `team[].photo` in `lib/site.ts`. The hero stays a car. Putting them
+in the hero as well was tried and pulled — it read as a flyer, not a website.
 
-| Asset | Where |
-|---|---|
-| `public/img/hero-team.jpg` | the home-page hero, both of them side by side |
-| `public/img/jay.jpg`, `public/img/jason.jpg` | the "Who shows up" cards, via `team[].photo` in `lib/site.ts` |
+```bash
+cd scripts && bash extract-people.sh
+```
 
-`scripts/extract-people.sh` regenerates all three from the two source flyers
-(`scripts/jay-src.jpg`, `scripts/jason-src.jpg`) and documents every crop, so
-you can re-frame without redoing the work by hand. Two numbers in there are
-load-bearing:
+That regenerates `public/img/jay-portrait.jpg` and `jason-portrait.jpg` from
+`scripts/jay-src.jpg` and `scripts/jason-src.jpg`, and the comments in it
+explain the one non-obvious thing:
 
-- Jay's crop is **208px** wide, not 215 — at 215 it catches the magenta edge of
-  the flyer's "FAST. CONVENIENT. RELIABLE." bar.
-- The hero canvas is **1200x1040**, matching the hero panel's aspect ratio. Make
-  it wider and `object-cover` starts slicing both men off at the edges.
+> Both men are boxed in by flyer furniture — an icon column down the left, a
+> headline block top right, a phone banner across the bottom. Cropping to miss
+> all of it gives you a passport photo. So the script **defocuses** the
+> headline first: a heavy blur composited back through a **soft-edged mask**,
+> which reads as depth of field. A hard-edged rectangle of blur is instantly
+> visible; the feather is what sells it. With the headline gone, the crop can
+> open up and both men get framed head-and-shoulders with the shirt logo
+> showing.
 
-If Jay and Jason ever send straight phone photos, prefer those — drop them in
-`public/img` under new filenames and repoint `photo` in `lib/site.ts`.
-**Never substitute a stock or generated face.** The entire point of that
-section is that these are the two people who actually turn up.
+Both outputs are square, and the card renders at `aspect-square`, so nothing
+gets cropped a second time. If you re-frame, keep the two head sizes close —
+side by side, a mismatch is the first thing you notice.
+
+If Jay and Jason ever send straight phone photos, prefer those: drop them in
+`public/img` under **new filenames** and repoint `photo`. **Never substitute a
+stock or generated face** — the whole point of that section is that these are
+the two people who actually turn up.
 
 ### Image rules that were set by the client
 
@@ -85,15 +93,21 @@ section is that these are the two people who actually turn up.
    confirmed it. Until then both team cards dial Jay's number and Jason's
    button shows the number rather than "Call Jason". Confirm it, add it to his
    entry in `team`, and the button relabels itself.
-2. **`/api/quote` is a stub.** It `console.log`s and returns 200. Quote-form
+2. **The sitemap and every canonical point at `gamechangerauto.shop`, not
+   `jay.epicdevsolutions.com`.** Jay owns that domain but it is currently a
+   parked lander, so Google is being sent to a page that is not the site. If
+   the plan is to move to it, point the DNS and this is already correct; if
+   not, change `siteUrl` in `lib/site.ts`. Either way it should not stay as
+   it is — pick one.
+3. **`/api/quote` is a stub.** It `console.log`s and returns 200. Quote-form
    leads currently go nowhere. Wire the Brevo drop-in from
    `epic/client-email-protocol` plus an SMS to Jay before pointing any paid
    traffic at the form. Phone and text links work fine today — those are the
    live lead paths.
-3. **Jason's ASE status is unconfirmed.** The site calls him a "certified
+4. **Jason's ASE status is unconfirmed.** The site calls him a "certified
    technician" and deliberately never says ASE about him. Do not upgrade that
    claim without confirming it.
-4. **Jason's flyer also claims "25 YEAR ASE CERTIFIED"** — that is almost
+5. **Jason's flyer also claims "25 YEAR ASE CERTIFIED"** — that is almost
    certainly the template copied from Jay's version, so the site does not
    repeat it. Do not promote Jason's credential without asking.
 

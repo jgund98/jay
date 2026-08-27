@@ -2,27 +2,19 @@
 const puppeteer = require("C:/Users/Lucky/gus-renny/node_modules/puppeteer");
 
 const BASE = "http://localhost:3441";
-const ROUTES = [
-  "/",
-  "/services",
-  "/our-work",
-  "/service-area",
-  "/about",
-  "/contact",
-  "/services/mobile-diagnostics",
-  "/services/brakes",
-  "/services/suspension-and-shocks",
-  "/services/cv-axles-and-drivetrain",
-  "/services/electrical-and-batteries",
-  "/services/ac-and-heating",
-  "/services/belts-timing-and-cooling",
-  "/services/pre-purchase-inspections",
-];
+/*
+ * Routes come from the sitemap so a new page can never be silently skipped —
+ * this list was hand-maintained and had already gone stale once.
+ */
+async function routes() {
+  const xml = await (await fetch(BASE + "/sitemap.xml")).text();
+  return [...xml.matchAll(new RegExp("<loc>([^<]+)</loc>","g"))].map((m) => new URL(m[1]).pathname);
+}
 
 (async () => {
   const browser = await puppeteer.launch({ headless: "new" });
   let bad = 0;
-  for (const route of ROUTES) {
+  for (const route of await routes()) {
     const page = await browser.newPage();
     await page.setViewport({ width: 1440, height: 900 });
     const failed = [];

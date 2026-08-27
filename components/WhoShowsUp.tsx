@@ -44,12 +44,14 @@ export default function WhoShowsUp() {
           {team.map((m) => (
             <Item key={m.name} className="h-full">
               <div className="edge-card group flex h-full flex-col overflow-hidden">
-                {/* A real photo gets a 4:5 portrait — people read better
-                    tall. The monogram fallback gets a short band instead: a
-                    tall block of gradient looks like a broken image. */}
+                {/* Square, because the source photos are square. A tighter
+                    frame would crop straight back into the zoom the wider crop
+                    was made to undo. The monogram fallback gets a short band
+                    instead — a tall block of gradient looks like a broken
+                    image rather than a design. */}
                 <div
                   className={`relative w-full overflow-hidden ${
-                    m.photo ? "aspect-[4/5] sm:aspect-[4/4.4]" : "h-[124px] sm:h-[140px]"
+                    m.photo ? "aspect-square" : "h-[124px] sm:h-[140px]"
                   }`}
                 >
                   {m.photo ? (
@@ -58,7 +60,7 @@ export default function WhoShowsUp() {
                       alt={`${m.name}, ${m.role} at ${site.name}`}
                       fill
                       sizes="(max-width:639px) 100vw, 50vw"
-                      className="object-cover object-[50%_12%] transition-transform duration-[900ms] group-hover:scale-[1.04]"
+                      className="object-cover object-center transition-transform duration-[900ms] group-hover:scale-[1.04]"
                     />
                   ) : (
                     /* Branded monogram, not a stock face — see lib/site.ts */

@@ -593,13 +593,14 @@ export const services: Service[] = [
 /**
  * The two owners.
  *
- * PHOTOS. `jay.jpg` and `jason.jpg` are cut from the two promotional flyers
- * Jay sent over. The flyer artwork around them — the lightning, the logo, the
- * headline — is AI-generated, but the men in it are photographs of Jay and
- * Jason in their Game Changer shirts, which is exactly what Jay asked for:
- * "a real picture of myself and my partner ... people see my face".
- * `scripts/extract-people.sh` records the exact ffmpeg crops, so they can be
- * regenerated or re-cropped without going back to the flyers by hand.
+ * PHOTOS. `jay-portrait.jpg` and `jason-portrait.jpg` are cut from the two
+ * promotional flyers Jay sent over. The flyer artwork around them — the
+ * lightning, the logo, the headline — is AI-generated, but the men in it are
+ * photographs of Jay and Jason in their Game Changer shirts, which is exactly
+ * what Jay asked for: "a real picture of myself and my partner ... people see
+ * my face". They live here and nowhere else — the hero stays a car.
+ * `scripts/extract-people.sh` records the exact ffmpeg work, so they can be
+ * regenerated or re-framed without going back to the flyers by hand.
  *
  * If they ever send straight phone photos, prefer those: drop them in
  * /public/img and repoint `photo` below. Nothing else needs touching.
@@ -629,7 +630,7 @@ export const team: TeamMember[] = [
       "The one who answers the phone. Dealer certified on Ford, GM and Chrysler diesel, and the person who diagnoses your car, turns the wrench and stands behind it.",
     phone: "(832) 528-0270",
     phoneHref: "tel:+18325280270",
-    photo: "/img/jay.jpg",
+    photo: "/img/jay-portrait.jpg",
   },
   {
     name: "Jason Garcia",
@@ -641,7 +642,7 @@ export const team: TeamMember[] = [
       "Came on as a partner this year. He answers the phone too, runs his own service calls and does the repairs — so whoever turns up, you get an owner.",
     phone: "(832) 528-0270",
     phoneHref: "tel:+18325280270",
-    photo: "/img/jason.jpg",
+    photo: "/img/jason-portrait.jpg",
   },
 ];
 
