@@ -88,26 +88,21 @@ the two people who actually turn up.
 
 ## 3. Open items
 
-1. **Jason's phone number needs one word from Jay.** His flyer prints
-   **+1 (936) 405-2838**, which is very likely his own line, but nobody has
-   confirmed it. Until then both team cards dial Jay's number and Jason's
-   button shows the number rather than "Call Jason". Confirm it, add it to his
-   entry in `team`, and the button relabels itself.
-2. **The sitemap and every canonical point at `gamechangerauto.shop`, not
+1. **The sitemap and every canonical point at `gamechangerauto.shop`, not
    `jay.epicdevsolutions.com`.** Jay owns that domain but it is currently a
    parked lander, so Google is being sent to a page that is not the site. If
    the plan is to move to it, point the DNS and this is already correct; if
    not, change `siteUrl` in `lib/site.ts`. Either way it should not stay as
    it is — pick one.
-3. **`/api/quote` is a stub.** It `console.log`s and returns 200. Quote-form
+2. **`/api/quote` is a stub.** It `console.log`s and returns 200. Quote-form
    leads currently go nowhere. Wire the Brevo drop-in from
    `epic/client-email-protocol` plus an SMS to Jay before pointing any paid
    traffic at the form. Phone and text links work fine today — those are the
    live lead paths.
-4. **Jason's ASE status is unconfirmed.** The site calls him a "certified
+3. **Jason's ASE status is unconfirmed.** The site calls him a "certified
    technician" and deliberately never says ASE about him. Do not upgrade that
    claim without confirming it.
-5. **Jason's flyer also claims "25 YEAR ASE CERTIFIED"** — that is almost
+4. **Jason's flyer also claims "25 YEAR ASE CERTIFIED"** — that is almost
    certainly the template copied from Jay's version, so the site does not
    repeat it. Do not promote Jason's credential without asking.
 
@@ -123,6 +118,10 @@ Every claim on the site traces to something Jay said or published:
   2026-08-19 (it was $35 before that).
 - **Jason Garcia, partner, certified technician** — confirmed by Jay. He called
   him a "small partner", so Jay stays the face of the business.
+- **Jason's line, (936) 405-2838** — confirmed by Jordan 2026-08-27. It is on
+  his team card and on /contact. Jay's (832) number is still the one in the
+  header, the hero, the popup and every service page; Jason's is a second
+  route in, not a replacement.
 - 4.5★ / 8 reviews, open 24 hours, tagline "Your ride, my priority.",
   LGBTQ+ friendly and disabled-owned — Google Business Profile.
 - 8 of the 9 photos on `/our-work` are Jay's own, off his Google profile and

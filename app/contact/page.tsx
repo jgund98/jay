@@ -2,9 +2,14 @@ import type { Metadata } from "next";
 import { Suspense } from "react";
 import PageHead from "@/components/PageHead";
 import ContactClient from "./ContactClient";
-import { site, coreCities } from "@/lib/site";
+import { site, coreCities, team } from "@/lib/site";
 import { PhoneIcon } from "@/components/Header";
 import Stars from "@/components/Stars";
+
+/* Falls back to the main line rather than throwing if the roster changes. */
+const jason =
+  team.find((m) => m.first === site.partnerFirst) ??
+  { phone: site.phone, phoneHref: site.phoneHref };
 
 export const metadata: Metadata = {
   title: "Get a Quote — Mobile Mechanic, Conroe & Montgomery County TX",
@@ -48,6 +53,7 @@ export default function ContactPage() {
                 </p>
                 <p className="mt-2 text-[14.5px] leading-relaxed text-chrome/65">
                   Rings {site.owner}&rsquo;s own phone, {site.hoursLong}.
+                  {site.partnerFirst} has his own line below.
                 </p>
                 <a
                   href={site.phoneHref}
@@ -87,6 +93,24 @@ export default function ContactPage() {
                     <dd className="mt-1.5 leading-relaxed text-chrome/70">
                       {coreCities.join(", ")} and the rest of Montgomery County
                       and north Houston.
+                    </dd>
+                  </div>
+                  <div>
+                    <dt className="eyebrow text-chrome/35">
+                      {site.partnerFirst}&rsquo;s line
+                    </dt>
+                    <dd className="mt-1.5 text-chrome/70">
+                      <a
+                        href={jason.phoneHref}
+                        className="font-display text-[17px] font-bold text-chrome underline-offset-4 transition-colors hover:text-cyan hover:underline"
+                        data-analytics="contact-call-partner"
+                      >
+                        {jason.phone}
+                      </a>
+                      <span className="mt-1 block text-[13.5px] leading-snug text-chrome/55">
+                        {site.partner} runs his own calls. Either number gets
+                        you an owner.
+                      </span>
                     </dd>
                   </div>
                   <div>

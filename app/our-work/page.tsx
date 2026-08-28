@@ -28,8 +28,10 @@ const shots = [
       "Timing belt service. Belt, tensioner, idlers and water pump replaced together — the pump is right there once the belt is off, and doing it later means paying that labor twice.",
     tag: "Timing & cooling",
     real: true,
-    span: "lg:col-span-2 lg:row-span-2",
-    ratio: "aspect-[3/4]",
+    span: "sm:col-span-2 lg:col-span-2 lg:row-span-2",
+    /* Portrait once it owns a 2x2 block at lg; landscape below that, where it
+       runs full width and a 3:4 would be nearly a thousand pixels tall. */
+    ratio: "aspect-[4/3] lg:aspect-[3/4]",
   },
   {
     src: "/img/real-cabin-filter.jpg",
@@ -105,6 +107,11 @@ const shots = [
 ];
 
 export default function OurWorkPage() {
+  /* The lead shot spans two columns at sm and a 2x2 block at lg, so the rest
+     have to be even for the grid to end flush. Widen the last one when they
+     are not — otherwise a tenth photo strands one card on its own row. */
+  const orphanAtSm = (shots.length - 1) % 2 === 1;
+
   return (
     <>
       <PageHead
@@ -125,8 +132,16 @@ export default function OurWorkPage() {
       <section className="bg-carbon pb-16 sm:pb-20">
         <div className="mx-auto max-w-[1240px] px-4 sm:px-6">
           <Stagger className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {shots.map((s) => (
-              <Item key={s.src + s.tag} className={s.span ?? ""}>
+            {shots.map((s, i) => (
+              <Item
+                key={s.src + s.tag}
+                className={
+                  s.span ??
+                  (orphanAtSm && i === shots.length - 1
+                    ? "sm:col-span-2 lg:col-span-1"
+                    : "")
+                }
+              >
                 <figure className="edge-card group h-full overflow-hidden">
                   <div className={`relative w-full overflow-hidden ${s.ratio}`}>
                     <Image

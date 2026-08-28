@@ -35,7 +35,7 @@ export const site = {
 
   // Jason came on 2026-08 as a partner. Jay called him a "small partner",
   // so Jay stays the face of the business and Jason is introduced as the
-  // second technician who also answers the phone and runs calls.
+  // second technician, on his own line, running his own calls.
   // ⚠️ Jay said "certified technician" — NOT confirmed as ASE, so the site
   // never says ASE about Jason. Confirm before changing this.
   // From Jay's own Facebook intro, verbatim: "I am a master technician I have
@@ -627,7 +627,7 @@ export const team: TeamMember[] = [
     role: "Owner & master technician",
     credential: "25 years · ASE certified · gas & diesel",
     blurb:
-      "The one who answers the phone. Dealer certified on Ford, GM and Chrysler diesel, and the person who diagnoses your car, turns the wrench and stands behind it.",
+      "Twenty-five years of it, and he still runs the calls himself. Dealer certified on Ford, GM and Chrysler diesel, and the person who diagnoses your car, turns the wrench and stands behind it.",
     phone: "(832) 528-0270",
     phoneHref: "tel:+18325280270",
     photo: "/img/jay-portrait.jpg",
@@ -639,9 +639,9 @@ export const team: TeamMember[] = [
     role: "Partner & technician",
     credential: "Certified technician",
     blurb:
-      "Came on as a partner this year. He answers the phone too, runs his own service calls and does the repairs — so whoever turns up, you get an owner.",
-    phone: "(832) 528-0270",
-    phoneHref: "tel:+18325280270",
+      "Came on as a partner this year. He runs his own service calls and does the repairs, on his own line — so whoever you get, you get an owner.",
+    phone: "(936) 405-2838",
+    phoneHref: "tel:+19364052838",
     photo: "/img/jason-portrait.jpg",
   },
 ];

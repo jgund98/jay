@@ -21,29 +21,36 @@ export default function CallBand({
       />
       <GCMark className="pointer-events-none absolute -right-16 top-1/2 h-[300px] w-auto -translate-y-1/2 opacity-[0.07] sm:-right-8 lg:right-6 lg:opacity-[0.1]" />
 
-      <div className="relative mx-auto max-w-[1240px] px-4 sm:px-6">
-        <div className="max-w-[36ch]">
+      {/* Copy left, CTAs right, so the band actually uses its width. It used
+          to be one narrow left column with the whole right half empty — and
+          the column was capped at max-w-[36ch], where `ch` resolves against
+          the WRAPPER's 16px font, not the 48px heading inside it. That worked
+          out to ~290px and stacked the headline four lines deep. Cap wrappers
+          in pixels; keep `ch` on the element whose font it should measure. */}
+      <div className="relative mx-auto flex max-w-[1240px] flex-col gap-9 px-4 sm:px-6 lg:flex-row lg:items-center lg:justify-between lg:gap-14">
+        <div className="max-w-[640px]">
           <p className="eyebrow text-cyan">{site.hours}</p>
-          <h2 className="mt-3 font-display text-[clamp(1.9rem,5vw,3rem)] font-black italic leading-[0.98] tracking-[-0.03em]">
+          <h2 className="mt-3 font-display text-[clamp(1.9rem,5vw,3rem)] font-black italic leading-[1.02] tracking-[-0.03em]">
             {heading}
           </h2>
-          <p className="mt-4 max-w-[42ch] text-[16.5px] leading-relaxed text-chrome/65">
+          <p className="mt-4 text-[16.5px] leading-relaxed text-chrome/65">
             {sub ??
               `${site.owner} answers his own phone, ${site.hoursLong}. The ${site.callOutFee} ${site.callOutLabel} is ${site.callOutNote}.`}
           </p>
-          <div className="mt-7 flex flex-wrap gap-3">
-            <a
-              href={site.phoneHref}
-              className="btn btn-call text-[16px]"
-              data-analytics="band-call"
-            >
-              <PhoneIcon className="h-[18px] w-[18px]" />
-              {site.phone}
-            </a>
-            <Link href="/contact" className="btn btn-primary text-[16px]">
-              Get a Quote
-            </Link>
-          </div>
+        </div>
+
+        <div className="flex flex-wrap gap-3 lg:shrink-0">
+          <a
+            href={site.phoneHref}
+            className="btn btn-call text-[16px]"
+            data-analytics="band-call"
+          >
+            <PhoneIcon className="h-[18px] w-[18px]" />
+            {site.phone}
+          </a>
+          <Link href="/contact" className="btn btn-primary text-[16px]">
+            Get a Quote
+          </Link>
         </div>
       </div>
     </section>

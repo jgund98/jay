@@ -20,6 +20,15 @@ export default function ServicesGrid({
     ? services.filter((s) => s.slug !== exclude).slice(0, 4)
     : services;
 
+  /* The grid is 2 columns at sm, 4 at lg, and the lead card eats a 2x2 block
+     at lg (a whole row at sm). How many trailing cards have to widen to make
+     that come out flush depends on how many services there are — the old code
+     always widened exactly one, which happened to be right for eight and left
+     a hole plus an orphan the moment a ninth was added. Compute it instead. */
+  const n = list.length;
+  const lgFill = related ? 0 : (4 - ((4 + (n - 1)) % 4)) % 4;
+  const smFill = related ? 0 : (n - 1) % 2;
+
   return (
     <section className="relative overflow-hidden bg-carbon-2 py-20 sm:py-24">
       <div className="weave pointer-events-none absolute inset-0" />
@@ -45,20 +54,27 @@ export default function ServicesGrid({
         </div>
 
         <Stagger className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {list.map((s, i) => (
+          {list.map((s, i) => {
+            const wideSm = !related && i > 0 && i >= n - smFill;
+            const wideLg = !related && i > 0 && i >= n - lgFill;
+            return (
             <Item
               key={s.slug}
-              /* The lead card takes a 2×2 block; the last card widens to two
-                 columns so the grid ends flush instead of leaving an orphan
-                 hole in the bottom-right. */
               className={
                 related
                   ? ""
                   : i === 0
                     ? "sm:col-span-2 lg:col-span-2 lg:row-span-2"
-                    : i === list.length - 1
-                      ? "lg:col-span-2"
-                      : ""
+                    : [
+                        wideSm ? "sm:col-span-2" : "",
+                        wideLg
+                          ? "lg:col-span-2"
+                          : wideSm
+                            ? "lg:col-span-1"
+                            : "",
+                      ]
+                        .filter(Boolean)
+                        .join(" ")
               }
             >
               <Link
@@ -108,7 +124,8 @@ export default function ServicesGrid({
                 </div>
               </Link>
             </Item>
-          ))}
+            );
+          })}
         </Stagger>
       </div>
     </section>

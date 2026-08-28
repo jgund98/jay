@@ -102,26 +102,17 @@ export default function WhoShowsUp() {
                   <p className="mt-3 flex-1 text-[15px] leading-relaxed text-chrome/65">
                     {m.blurb}
                   </p>
-                  {/* Jason has no separate number yet, so his card must not
-                      imply one — a "Call Jason" button that dials Jay's phone
-                      is a small lie. Give him his own number in lib/site.ts
-                      and this flips to "Call Jason" on its own. */}
                   <a
                     href={m.phoneHref}
                     className="btn btn-call mt-5 w-full text-[15px]"
                     data-analytics="team-call"
                   >
                     <PhoneIcon />
-                    {m.phoneHref === site.phoneHref && m.first !== site.ownerShort
-                      ? `Call ${site.phone}`
-                      : `Call ${m.first}`}
+                    Call {m.first}
                   </a>
-                  {m.phoneHref === site.phoneHref &&
-                    m.first !== site.ownerShort && (
-                      <p className="mt-2 text-center text-[12.5px] text-chrome/40">
-                        One line &mdash; whichever of them is free picks up.
-                      </p>
-                    )}
+                  <p className="mt-2 text-center font-mono text-[12.5px] tracking-wide text-chrome/40">
+                    {m.phone}
+                  </p>
                 </div>
               </div>
             </Item>

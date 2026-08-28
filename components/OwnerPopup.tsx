@@ -99,9 +99,9 @@ export default function OwnerPopup() {
               </h3>
               <p className="mt-2.5 text-[15px] leading-relaxed text-chrome/65">
                 No call center, no service advisor, no runaround. That number
-                rings a real cell phone, not a front desk &mdash; and whoever
-                picks up, {site.ownerShort} or his partner, is the same person
-                pulling into your driveway with the tools.
+                rings {site.ownerShort}&rsquo;s own cell phone, not a front desk
+                &mdash; and the person who answers it is the person pulling into
+                your driveway with the tools.
               </p>
 
               <div className="mt-5 grid gap-2.5">

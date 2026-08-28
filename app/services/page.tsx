@@ -32,18 +32,32 @@ export default function ServicesPage() {
       <section className="bg-carbon-2 py-16 sm:py-20">
         <div className="mx-auto max-w-[1240px] px-4 sm:px-6">
           <Stagger className="grid gap-5 md:grid-cols-2">
-            {services.map((s) => (
-              <Item key={s.slug} className="h-full">
+            {services.map((s, i) => {
+              /* An odd number of services strands the last card alone on a
+                 half-empty row. Widen it so the grid ends flush, and shrink
+                 its image share to match — at full width a 38% image is a
+                 billboard. */
+              const wide =
+                services.length % 2 === 1 && i === services.length - 1;
+              return (
+              <Item
+                key={s.slug}
+                className={`h-full ${wide ? "md:col-span-2" : ""}`}
+              >
                 <Link
                   href={`/services/${s.slug}`}
                   className="edge-card group flex h-full flex-col overflow-hidden sm:flex-row"
                 >
-                  <div className="relative aspect-[16/9] w-full shrink-0 overflow-hidden sm:aspect-auto sm:h-auto sm:w-[38%]">
+                  <div
+                    className={`relative aspect-[16/9] w-full shrink-0 overflow-hidden sm:aspect-auto sm:h-auto ${
+                      wide ? "sm:w-[24%]" : "sm:w-[38%]"
+                    }`}
+                  >
                     <Image
                       src={s.image}
                       alt={s.imageAlt}
                       fill
-                      sizes="(max-width:639px) 100vw, 260px"
+                      sizes={wide ? "(max-width:639px) 100vw, 300px" : "(max-width:639px) 100vw, 260px"}
                       className="object-cover transition-transform duration-[900ms] group-hover:scale-105"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-carbon-2/85 to-transparent sm:bg-gradient-to-r" />
@@ -64,7 +78,8 @@ export default function ServicesPage() {
                   </div>
                 </Link>
               </Item>
-            ))}
+              );
+            })}
           </Stagger>
         </div>
       </section>
