@@ -7,15 +7,26 @@ import { sendLead } from "@/lib/lead-email";
  * This route only validates and hands off; lib/lead-email.ts builds and sends
  * the email, so the preview route renders exactly what actually gets sent.
  *
- * Requires BREVO_API_KEY and LEAD_TO_EMAIL. Without them sendLead no-ops and
- * this returns 502 rather than a cheerful ok — a misconfigured deploy should
- * make the visitor see the "call him instead" fallback, not swallow the lead.
+ * Requires BREVO_API_KEY. Without it sendLead no-ops and this returns 502
+ * rather than a cheerful ok — a misconfigured deploy should make the visitor
+ * see the "call him instead" fallback, not swallow the lead.
+ *
+ * GET returns whether the key is present. That exists because the only other
+ * way to find out is to submit the form, and submitting the form mails a fake
+ * lead to the shop owner. It reports a boolean and never the value.
  */
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
 const str = (v: unknown) => (typeof v === "string" ? v.trim() : "");
+
+export function GET() {
+  return NextResponse.json({
+    ok: true,
+    configured: Boolean(process.env.BREVO_API_KEY),
+  });
+}
 
 export async function POST(req: Request) {
   let body: unknown;
