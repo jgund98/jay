@@ -52,7 +52,7 @@ export default function ContactPage() {
                   {site.phone}
                 </p>
                 <p className="mt-2 text-[14.5px] leading-relaxed text-chrome/65">
-                  Rings {site.owner}&rsquo;s own phone, {site.hoursLong}.
+                  Rings {site.owner}&rsquo;s own phone, {site.hoursLong}.{" "}
                   {site.partnerFirst} has his own line below.
                 </p>
                 <a

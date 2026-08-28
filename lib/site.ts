@@ -607,6 +607,54 @@ export const services: Service[] = [
  * Never substitute a stock face or a generated one — the whole point of this
  * section is that these are the actual two people who show up.
  */
+/*
+ * Quote-form options. These live here, not in the form, because the lead email
+ * has to turn the stored ids back into the words the customer actually saw —
+ * and has to list them in the order the form presented them. Two copies of
+ * these lists means the email eventually prints "nostart" at somebody.
+ */
+export const QUOTE_ISSUES = [
+  { id: "nostart", label: "Won't start" },
+  { id: "cel", label: "Check engine light" },
+  { id: "brakes", label: "Brakes" },
+  { id: "shake", label: "Clunks or shakes" },
+  { id: "ac", label: "A/C or heat" },
+  { id: "overheat", label: "Overheating or leaking" },
+  { id: "electrical", label: "Battery or electrical" },
+  { id: "ppi", label: "Pre-purchase inspection" },
+  { id: "maint", label: "Routine maintenance" },
+  { id: "other", label: "Something else" },
+] as const;
+
+export const QUOTE_WHERE = [
+  { id: "home", label: "At my home" },
+  { id: "work", label: "At my work" },
+  { id: "roadside", label: "Stuck on the roadside" },
+  { id: "seller", label: "At a seller or dealer" },
+] as const;
+
+export const QUOTE_URGENCY = [
+  { id: "now", label: "Right now" },
+  { id: "today", label: "Today or tonight" },
+  { id: "week", label: "This week" },
+  { id: "planning", label: "Just planning ahead" },
+] as const;
+
+/** id -> label, preserving the order the options are listed in above. */
+export function labelsFor(
+  opts: readonly { id: string; label: string }[],
+  ids: string[],
+): string[] {
+  return opts.filter((o) => ids.includes(o.id)).map((o) => o.label);
+}
+
+export function labelFor(
+  opts: readonly { id: string; label: string }[],
+  id: string,
+): string {
+  return opts.find((o) => o.id === id)?.label ?? id;
+}
+
 export type TeamMember = {
   name: string;
   first: string;

@@ -94,17 +94,61 @@ the two people who actually turn up.
    the plan is to move to it, point the DNS and this is already correct; if
    not, change `siteUrl` in `lib/site.ts`. Either way it should not stay as
    it is — pick one.
-2. **`/api/quote` is a stub.** It `console.log`s and returns 200. Quote-form
-   leads currently go nowhere. Wire the Brevo drop-in from
-   `epic/client-email-protocol` plus an SMS to Jay before pointing any paid
-   traffic at the form. Phone and text links work fine today — those are the
-   live lead paths.
+2. **The lead email needs five env vars set in Vercel** (Settings >
+   Environment Variables, all environments). Without them `sendLead` no-ops,
+   the route returns 502, and the form tells the visitor to call instead:
+
+   | Var | Value |
+   |---|---|
+   | `BREVO_API_KEY` | the Brevo v3 key (`xkeysib-...`) — the same key across Epic client sites |
+   | `LEAD_TO_EMAIL` | `gamechangerautomotive@gmail.com` |
+   | `LEAD_FROM_EMAIL` | `noreply@epicdevsolutions.com` |
+   | `LEAD_FROM_NAME` | `Game Changer Automotive` |
+   | `LEAD_SITE_NAME` | leave unset — it appends the site domain under the header |
+
+   They are already in `.env.local` for local work. **`.env.local` is
+   gitignored and must stay that way** — that key is a live credential.
+
 3. **Jason's ASE status is unconfirmed.** The site calls him a "certified
    technician" and deliberately never says ASE about him. Do not upgrade that
    claim without confirming it.
 4. **Jason's flyer also claims "25 YEAR ASE CERTIFIED"** — that is almost
    certainly the template copied from Jay's version, so the site does not
    repeat it. Do not promote Jason's credential without asking.
+
+---
+
+## 3b. How leads reach the shop
+
+The quote form (the only form on the site) POSTs to `/api/quote`, which calls
+`sendLead` in `lib/lead-email.ts` — Epic client email protocol, sending via
+Brevo from `noreply@epicdevsolutions.com` to the shop inbox.
+
+```bash
+LEAD_PREVIEW=1 npm start
+```
+
+Then open http://localhost:3441/api/quote/preview to see exactly what lands in
+the inbox (`?empty=1` for the version where the optional fields were skipped).
+The preview renders through the same `buildLeadEmail` the send uses, so it
+cannot drift from the real thing, and it 404s in production.
+
+Worth knowing before changing it:
+
+- **The option lists live in `lib/site.ts`** (`QUOTE_ISSUES`, `QUOTE_WHERE`,
+  `QUOTE_URGENCY`), not in the form. The email turns stored ids back into the
+  words the customer saw, in the order the form showed them. Two copies of
+  those lists means the email eventually prints `nostart` at Jay.
+- **Skipped optional fields still print their label** ("Not provided"), so the
+  reader can tell a blank from a field the form never asked about.
+- **The call button is the table-cell pattern**, not a styled `<a>`. The first
+  version used `display:inline-block` and taps did nothing on a phone; the
+  `<td bgcolor>` plus `display:block` version makes the whole cell the tap
+  target. The number is repeated as plain text in the footer because mail
+  clients auto-detect bare phone numbers, which is a second tap path that
+  survives any link rewriting.
+- **Never point `LEAD_TO_EMAIL` at the client inbox while testing.** Send test
+  fires to an Epic address.
 
 ---
 

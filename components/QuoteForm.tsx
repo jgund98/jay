@@ -3,44 +3,24 @@
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { EASE } from "@/lib/motion";
-import { site, coreCities, services } from "@/lib/site";
+import {
+  site,
+  coreCities,
+  QUOTE_ISSUES as ISSUES,
+  QUOTE_WHERE as WHERE,
+  QUOTE_URGENCY as URGENCY,
+} from "@/lib/site";
 import { PhoneIcon } from "./Header";
 
 /*
  * Three steps, nothing optional that isn't. Step 1 is prefilled from The Scan
  * when the visitor arrives via ?issue=, so most people land already answered.
  *
- * NOTE FOR JORDAN: submit currently POSTs to /api/quote, which logs and
- * returns ok. Wire it to the Brevo drop-in (epic\client-email-protocol)
- * before launch so Jay actually receives these.
+ * Submitting POSTs to /api/quote, which emails the shop via Brevo. If that
+ * send fails the route returns 502 and the form shows the "call him instead"
+ * fallback — a lead should never disappear quietly.
  */
 
-const ISSUES = [
-  { id: "nostart", label: "Won't start" },
-  { id: "cel", label: "Check engine light" },
-  { id: "brakes", label: "Brakes" },
-  { id: "shake", label: "Clunks or shakes" },
-  { id: "ac", label: "A/C or heat" },
-  { id: "overheat", label: "Overheating or leaking" },
-  { id: "electrical", label: "Battery or electrical" },
-  { id: "ppi", label: "Pre-purchase inspection" },
-  { id: "maint", label: "Routine maintenance" },
-  { id: "other", label: "Something else" },
-];
-
-const WHERE = [
-  { id: "home", label: "At my home" },
-  { id: "work", label: "At my work" },
-  { id: "roadside", label: "Stuck on the roadside" },
-  { id: "seller", label: "At a seller or dealer" },
-];
-
-const URGENCY = [
-  { id: "now", label: "Right now" },
-  { id: "today", label: "Today or tonight" },
-  { id: "week", label: "This week" },
-  { id: "planning", label: "Just planning ahead" },
-];
 
 type Data = {
   issues: string[];
@@ -50,6 +30,7 @@ type Data = {
   vehicle: string;
   name: string;
   phone: string;
+  email: string;
   notes: string;
 };
 
@@ -61,6 +42,7 @@ const EMPTY: Data = {
   vehicle: "",
   name: "",
   phone: "",
+  email: "",
   notes: "",
 };
 
@@ -317,6 +299,18 @@ export default function QuoteForm({ prefillIssue }: { prefillIssue?: string }) {
                     />
                   </Field>
                 </div>
+
+                <Field label="Email" optional>
+                  <input
+                    value={data.email}
+                    onChange={(e) => setData({ ...data, email: e.target.value })}
+                    placeholder="Only if you would rather be emailed"
+                    type="email"
+                    inputMode="email"
+                    autoComplete="email"
+                    className={inputCls}
+                  />
+                </Field>
 
                 <Field label="Anything else worth knowing" optional>
                   <textarea
