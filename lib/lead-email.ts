@@ -5,14 +5,14 @@
  * these on a phone between jobs, so the customer's name and number come first
  * and the number is a real tel: link he can tap.
  *
- * Env (all of these must also exist in Vercel, or production silently sends
- * nothing — sendLead no-ops when the key or the recipient is missing):
- *   BREVO_API_KEY    required   Brevo v3 key (xkeysib-...)
- *   LEAD_TO_EMAIL    required   where this client's leads land (comma-separated ok)
- *   LEAD_FROM_EMAIL  optional   default noreply@epicdevsolutions.com
- *   LEAD_FROM_NAME   optional   default "Website"
- *   LEAD_SITE_NAME   optional   appended after the kicker; leave unset to
- *                               keep the site's domain out of the header
+ * BREVO_API_KEY is the ONLY environment variable this needs, in Vercel or
+ * anywhere else. It is the only secret; everything else about who the mail
+ * goes to and who it comes from is a fact about this client, so it lives in
+ * the repo below where it can be read and reviewed.
+ *
+ * Each of those still honours an env var of the same name if one is set, so a
+ * recipient can be changed without a deploy — useful for pointing leads at an
+ * Epic address temporarily without editing code.
  */
 
 import {
@@ -25,10 +25,14 @@ import {
 
 const BREVO_ENDPOINT = "https://api.brevo.com/v3/smtp/email";
 
+/* Where this client's leads go, and who they come from. Overridable by env,
+   but they default to the real values so nothing has to be configured. */
+const TO_EMAIL = process.env.LEAD_TO_EMAIL || "gamechangerautomotive@gmail.com";
 const FROM_EMAIL =
   process.env.LEAD_FROM_EMAIL || "noreply@epicdevsolutions.com";
-const FROM_NAME = process.env.LEAD_FROM_NAME || "Website";
-const TO_EMAIL = process.env.LEAD_TO_EMAIL || "";
+const FROM_NAME = process.env.LEAD_FROM_NAME || "Game Changer Automotive";
+/* Deliberately empty: when set it prints the site's domain under the email
+   header, which reads like a machine sent it. */
 const SITE_NAME = process.env.LEAD_SITE_NAME || "";
 
 /*
@@ -328,10 +332,8 @@ export async function sendLead(lead: Lead): Promise<{
   messageId?: string;
 }> {
   const key = process.env.BREVO_API_KEY;
-  if (!key || !TO_EMAIL) {
-    console.warn(
-      "[lead] BREVO_API_KEY or LEAD_TO_EMAIL missing — skipping send.",
-    );
+  if (!key) {
+    console.warn("[lead] BREVO_API_KEY missing — skipping send.");
     return { ok: false, skipped: true };
   }
   const built = buildLeadEmail(lead);

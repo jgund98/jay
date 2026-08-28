@@ -94,20 +94,12 @@ the two people who actually turn up.
    the plan is to move to it, point the DNS and this is already correct; if
    not, change `siteUrl` in `lib/site.ts`. Either way it should not stay as
    it is — pick one.
-2. **The lead email needs five env vars set in Vercel** (Settings >
-   Environment Variables, all environments). Without them `sendLead` no-ops,
-   the route returns 502, and the form tells the visitor to call instead:
-
-   | Var | Value |
-   |---|---|
-   | `BREVO_API_KEY` | the Brevo v3 key (`xkeysib-...`) — the same key across Epic client sites |
-   | `LEAD_TO_EMAIL` | `gamechangerautomotive@gmail.com` |
-   | `LEAD_FROM_EMAIL` | `noreply@epicdevsolutions.com` |
-   | `LEAD_FROM_NAME` | `Game Changer Automotive` |
-   | `LEAD_SITE_NAME` | leave unset — it appends the site domain under the header |
-
-   They are already in `.env.local` for local work. **`.env.local` is
-   gitignored and must stay that way** — that key is a live credential.
+2. **Set `BREVO_API_KEY` in Vercel** (Settings > Environment Variables, all
+   environments). It is the only variable this site needs — the recipient and
+   sender are defaults in `lib/lead-email.ts`, because only the key is a
+   secret. Until it exists the route returns 502 and the form tells the
+   visitor to call instead. **Env vars only apply to new builds**, so redeploy
+   after adding it.
 
 3. **Jason's ASE status is unconfirmed.** The site calls him a "certified
    technician" and deliberately never says ASE about him. Do not upgrade that
@@ -147,8 +139,17 @@ Worth knowing before changing it:
   target. The number is repeated as plain text in the footer because mail
   clients auto-detect bare phone numbers, which is a second tap path that
   survives any link rewriting.
-- **Never point `LEAD_TO_EMAIL` at the client inbox while testing.** Send test
-  fires to an Epic address.
+- **Config lives in code, not env.** `BREVO_API_KEY` is the only environment
+  variable; `LEAD_TO_EMAIL`, `LEAD_FROM_EMAIL` and `LEAD_FROM_NAME` default to
+  this client's real values in `lib/lead-email.ts`. Each still honours an env
+  var of the same name if one is set, which is how you redirect leads without
+  a deploy.
+- **`LEAD_SITE_NAME` must stay unset.** Setting it prints the site's domain
+  under the email header, which reads like a machine sent it.
+- **Never let `LEAD_TO_EMAIL` resolve to the client inbox while testing.** Add
+  `LEAD_TO_EMAIL=<an Epic address>` to `.env.local`, test, then remove the
+  line. Editing the file is deterministic; relying on shell-env precedence is
+  the kind of guess that mails a fake lead to the client.
 
 ---
 
