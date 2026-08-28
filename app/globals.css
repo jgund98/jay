@@ -138,6 +138,10 @@
     inset 0 1px 0 rgba(255, 255, 255, 0.35);
 }
 .btn-call {
+  /* A phone number must never break across lines. Every .btn-call label is
+     either a number or "Call <name>", so nowrap is safe here and stops the
+     number splitting if a button ever gets squeezed. */
+  white-space: nowrap;
   background: linear-gradient(112deg, #2ad3da 0%, #38e1e8 100%);
   color: #05202a;
   box-shadow:

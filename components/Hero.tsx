@@ -136,11 +136,11 @@ export default function Hero() {
             initial="hidden"
             animate="show"
             variants={rise}
-            className="mt-6 flex flex-wrap gap-3"
+            className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap"
           >
             <a
               href={site.phoneHref}
-              className="btn btn-call flex-1 text-[16px] sm:flex-none"
+              className="btn btn-call w-full text-[16px] sm:w-auto"
               data-analytics="hero-call"
             >
               <PhoneIcon className="h-[18px] w-[18px]" />
@@ -148,7 +148,7 @@ export default function Hero() {
             </a>
             <Link
               href="/#scan"
-              className="btn btn-primary flex-1 text-[16px] sm:flex-none"
+              className="btn btn-primary w-full text-[16px] sm:w-auto"
             >
               What&rsquo;s wrong with my car?
             </Link>
