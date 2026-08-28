@@ -11,9 +11,18 @@ import { sendLead } from "@/lib/lead-email";
  * rather than a cheerful ok — a misconfigured deploy should make the visitor
  * see the "call him instead" fallback, not swallow the lead.
  *
- * GET returns whether the key is present. That exists because the only other
- * way to find out is to submit the form, and submitting the form mails a fake
- * lead to the shop owner. It reports a boolean and never the value.
+ * GET is a health check, because the only other way to find out whether a
+ * deploy can send is to submit the form — and submitting the form mails a
+ * fake lead to the shop owner.
+ *
+ *   GET /api/quote            -> is the key present
+ *   GET /api/quote?verify=1   -> is it actually a working key, checked against
+ *                                Brevo's account endpoint, which sends nothing
+ *
+ * The second one matters: a key can be present and still wrong. This one was
+ * handed over base64-wrapped, and pasting the wrapper instead of the decoded
+ * xkeysib-... value would look identical here but 401 on every send. Neither
+ * response ever includes the key.
  */
 
 export const runtime = "nodejs";
@@ -21,11 +30,30 @@ export const dynamic = "force-dynamic";
 
 const str = (v: unknown) => (typeof v === "string" ? v.trim() : "");
 
-export function GET() {
-  return NextResponse.json({
-    ok: true,
-    configured: Boolean(process.env.BREVO_API_KEY),
-  });
+export async function GET(req: Request) {
+  const key = process.env.BREVO_API_KEY;
+  const configured = Boolean(key);
+  if (!configured || !new URL(req.url).searchParams.has("verify")) {
+    return NextResponse.json({ ok: true, configured });
+  }
+  try {
+    const res = await fetch("https://api.brevo.com/v3/account", {
+      headers: { "api-key": key as string, accept: "application/json" },
+    });
+    return NextResponse.json({
+      ok: true,
+      configured,
+      keyValid: res.ok,
+      brevoStatus: res.status,
+    });
+  } catch {
+    return NextResponse.json({
+      ok: true,
+      configured,
+      keyValid: false,
+      brevoStatus: 0,
+    });
+  }
 }
 
 export async function POST(req: Request) {
