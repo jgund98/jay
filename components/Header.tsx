@@ -70,7 +70,7 @@ export default function Header() {
           >
             <Link
               href="/services"
-              className={`rounded-lg px-3 py-2 font-display text-[15px] font-semibold transition-colors ${
+              className={`whitespace-nowrap rounded-lg px-2.5 py-2 font-display text-[15px] font-semibold transition-colors xl:px-3 ${
                 pathname.startsWith("/services")
                   ? "text-cyan"
                   : "text-chrome/80 hover:text-chrome"
@@ -112,7 +112,7 @@ export default function Header() {
             <Link
               key={n.href}
               href={n.href}
-              className={`rounded-lg px-3 py-2 font-display text-[15px] font-semibold transition-colors ${
+              className={`whitespace-nowrap rounded-lg px-2.5 py-2 font-display text-[15px] font-semibold transition-colors xl:px-3 ${
                 pathname === n.href
                   ? "text-cyan"
                   : "text-chrome/80 hover:text-chrome"
@@ -135,7 +135,7 @@ export default function Header() {
           </a>
           <Link
             href="/contact"
-            className="btn btn-primary hidden px-4 py-2.5 text-[14px] md:inline-flex"
+            className="btn btn-primary hidden whitespace-nowrap px-4 py-2.5 text-[14px] md:inline-flex"
           >
             Get a Quote
           </Link>

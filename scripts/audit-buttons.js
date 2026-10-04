@@ -9,7 +9,9 @@
  */
 const puppeteer = require("C:/Users/Lucky/gus-renny/node_modules/puppeteer");
 const BASE = "http://localhost:3441";
-const WIDTHS = [320, 375, 414, 768, 1440];
+// 1024 = iPad landscape, the one desktop-nav width tight enough to wrap the
+// header (caught 2026-10-04 after this list had skipped it).
+const WIDTHS = [320, 375, 414, 768, 1024, 1440];
 
 (async () => {
   const xml = await (await fetch(BASE + "/sitemap.xml")).text();
