@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Logo from "./Logo";
-import { site, services, allCities, coreCities } from "@/lib/site";
+import { site, services, allCities, coreCities, serviceZips } from "@/lib/site";
 import { PhoneIcon } from "./Header";
 import Stars from "./Stars";
 
@@ -122,6 +122,9 @@ export default function Footer() {
               .filter((c) => !coreCities.includes(c as (typeof coreCities)[number]))
               .join(", ")}{" "}
             and the rest of Montgomery County and north Houston.
+          </p>
+          <p className="mt-2.5 font-mono text-[12.5px] leading-relaxed tracking-[0.04em] text-chrome/40">
+            ZIP codes {serviceZips.join(", ")}
           </p>
         </div>
 

@@ -10,8 +10,8 @@ export default function Reviews() {
           <div>
             <p className="eyebrow text-violet">In their words</p>
             <h2 className="mt-3 font-display text-[clamp(2rem,5vw,3.1rem)] font-black italic leading-[0.98] tracking-[-0.03em] text-steel-dark">
-              {site.rating} stars, and
-              <br className="hidden sm:block" /> not a single upsell.
+              {site.rating} stars.
+              <br className="hidden sm:block" /> Not a single upsell.
             </h2>
           </div>
           <a

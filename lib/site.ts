@@ -17,8 +17,11 @@ export const site = {
   smsHref: "sms:+18325280270",
   phoneRaw: "+18325280270",
 
-  domain: "gamechangerauto.shop",
-  url: "https://gamechangerauto.shop",
+  // The live domain, connected in Vercel (the apex 308s to www). Every
+  // canonical, the sitemap, robots.txt and the JSON-LD build from this.
+  // gamechangerauto.shop is a parked lander Jay also owns — never point here.
+  domain: "www.gamechangerautomotive.com",
+  url: "https://www.gamechangerautomotive.com",
 
   hours: "Open 24 hours",
   hoursLong: "24 hours a day, 7 days a week",
@@ -103,6 +106,46 @@ export const allCities = [
   "Cut and Shoot",
   "Cleveland",
 ] as const;
+
+/**
+ * ZIP codes per town — USPS standard ZIPs only (no PO-box-only codes), checked
+ * against zip-codes.com's county lists 2026-10-04. Jay asked for these so
+ * people searching by ZIP find him. Small towns share ZIPs with their
+ * neighbours (Shenandoah and Oak Ridge North sit inside 77381/77384-77386),
+ * so `serviceZips` below de-duplicates.
+ */
+export const cityZips: Record<(typeof allCities)[number], string[]> = {
+  Conroe: ["77301", "77302", "77303", "77304", "77306", "77384", "77385"],
+  Montgomery: ["77316", "77356"],
+  Spring: ["77373", "77379", "77386", "77388", "77389"],
+  Humble: ["77338", "77346", "77396"],
+  Porter: ["77365"],
+  Anderson: ["77830"],
+  "The Woodlands": ["77380", "77381", "77382"],
+  Willis: ["77318", "77378"],
+  "New Caney": ["77357"],
+  Magnolia: ["77354", "77355"],
+  Tomball: ["77375", "77377"],
+  Kingwood: ["77339", "77345"],
+  Splendora: ["77372"],
+  "Panorama Village": ["77304"],
+  "Oak Ridge North": ["77385", "77386"],
+  Shenandoah: ["77381", "77384", "77385"],
+  Pinehurst: ["77362"],
+  Atascocita: ["77346"],
+  "Cut and Shoot": ["77303", "77306"],
+  Cleveland: ["77327", "77328"],
+};
+
+/** Every ZIP covered, de-duplicated and in numeric order. */
+export const serviceZips: string[] = [
+  ...new Set(Object.values(cityZips).flat()),
+].sort();
+
+/** The towns a ZIP belongs to, in the order `allCities` lists them. */
+export function townsForZip(zip: string): string[] {
+  return allCities.filter((c) => cityZips[c].includes(zip));
+}
 
 export type Service = {
   slug: string;

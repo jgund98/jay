@@ -9,7 +9,8 @@
 
 import { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
-import { site } from "@/lib/site";
+import { site, serviceZips } from "@/lib/site";
+import ZipCheck from "./ZipCheck";
 
 type Town = {
   name: string;
@@ -99,15 +100,12 @@ export default function ServiceArea({ compact = false }: { compact?: boolean }) 
               to Cleveland in the east, and all the way down to Humble and
               Atascocita.
             </p>
-            <p className="mt-4 max-w-[44ch] text-[16.5px] leading-relaxed text-chrome/60">
-              Not sure whether you&rsquo;re inside it? Call and ask. He answers
-              the phone himself, at any hour.
-            </p>
+            <ZipCheck withCall={compact} />
 
             {!compact && (
               <a
                 href={site.phoneHref}
-                className="btn btn-call mt-7 text-[16px]"
+                className="btn btn-call mt-3 text-[16px]"
                 data-analytics="area-call"
               >
                 {site.phone}
@@ -248,6 +246,24 @@ export default function ServiceArea({ compact = false }: { compact?: boolean }) 
             Swipe the map →
           </p>
         </div>
+
+        {/* Every ZIP as plain text: what a search engine matches a ZIP search
+            against. Bare numbers, not chips or dot-separated text: a chip
+            cloud strands its last row as boxes, and separators dangle at
+            line ends. Plain spaced numbers ending short read as text. /service-area
+            breaks them out town by town instead. */}
+        {!compact && (
+          <div className="mt-12 border-t border-violet-soft/12 pt-8">
+            <h3 className="eyebrow text-chrome/50">
+              ZIP codes we cover
+            </h3>
+            <ul className="mt-3 flex flex-wrap gap-x-5 gap-y-1.5 font-mono text-[14px] tracking-[0.06em] text-chrome/60">
+              {serviceZips.map((z) => (
+                <li key={z}>{z}</li>
+              ))}
+            </ul>
+          </div>
+        )}
       </div>
     </section>
   );

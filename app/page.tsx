@@ -20,6 +20,9 @@ export default function Home() {
   return (
     <>
       <Hero />
+      {/* Jay asked for reviews up front: straight after the hero, so proof
+          lands before anything else is asked of the visitor. */}
+      <Reviews />
       <WhoShowsUp />
       <TheScan />
       <WhyMobile />
@@ -27,7 +30,6 @@ export default function Home() {
         intro="Everything short of an engine rebuild happens where your car already is. If you don't see it listed, call and ask — the answer is usually yes."
       />
       <TheMan />
-      <Reviews />
       <ServiceArea />
       <CallBand />
     </>

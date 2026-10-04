@@ -34,8 +34,22 @@ export default function CallBand({
             {heading}
           </h2>
           <p className="mt-4 text-[16.5px] leading-relaxed text-chrome/65">
-            {sub ??
-              `${site.owner} answers his own phone, ${site.hoursLong}. The ${site.callOutFee} ${site.callOutLabel} is ${site.callOutNote}.`}
+            {/* The phone number must never break at its hyphen. */}
+            {(
+              sub ??
+              `${site.owner} answers his own phone, ${site.hoursLong}. The ${site.callOutFee} ${site.callOutLabel} is ${site.callOutNote}.`
+            )
+              .split(site.phone)
+              .flatMap((part, i) =>
+                i === 0
+                  ? [part]
+                  : [
+                      <span key={i} className="whitespace-nowrap">
+                        {site.phone}
+                      </span>,
+                      part,
+                    ],
+              )}
           </p>
         </div>
 

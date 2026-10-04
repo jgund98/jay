@@ -4,7 +4,7 @@ Mobile-mechanic site for **Jay Metcalf**, Conroe / Montgomery County, TX.
 
 | | |
 |---|---|
-| Live | https://jay.epicdevsolutions.com |
+| Live | https://www.gamechangerautomotive.com (apex 308s to www; jay.epicdevsolutions.com 308s here via `next.config.ts`) |
 | Repo | `jgund98/jay` (branch `main`) |
 | Hosting | Vercel — auto-deploys on every push to `main` |
 | Local dev | `npm run dev` → http://localhost:3441 |
@@ -88,12 +88,11 @@ the two people who actually turn up.
 
 ## 3. Open items
 
-1. **The sitemap and every canonical point at `gamechangerauto.shop`, not
-   `jay.epicdevsolutions.com`.** Jay owns that domain but it is currently a
-   parked lander, so Google is being sent to a page that is not the site. If
-   the plan is to move to it, point the DNS and this is already correct; if
-   not, change `siteUrl` in `lib/site.ts`. Either way it should not stay as
-   it is — pick one.
+1. **Domain — resolved 2026-10-04.** `site.url` is now
+   `https://www.gamechangerautomotive.com`, the domain actually connected in
+   Vercel. Until then every canonical and the sitemap pointed at
+   `gamechangerauto.shop`, a parked lander Jay also owns. Never point
+   anything there unless that domain gets connected to this project.
 2. **Set `BREVO_API_KEY` in Vercel** (Settings > Environment Variables, all
    environments). It is the only variable this site needs — the recipient and
    sender are defaults in `lib/lead-email.ts`, because only the key is a
@@ -109,6 +108,22 @@ the two people who actually turn up.
    repeat it. Do not promote Jason's credential without asking.
 
 ---
+
+## 3a. Search, AI search and ZIP codes (2026-10-04)
+
+- **robots.txt** (`app/robots.ts`) allows everyone and names the search and
+  AI crawlers explicitly, OAI-SearchBot (ChatGPT search) included. Only
+  `/api/` is disallowed.
+- **ZIP codes** live in `cityZips` in `lib/site.ts`, one list per town,
+  USPS standard ZIPs only. They feed the home-page ZIP checker and ZIP list,
+  the per-town ZIPs on /service-area, the footer on every page, and
+  `areaServed` in the JSON-LD. Add a town to `allCities` and TypeScript
+  will make you give it ZIPs.
+- **Bing / ChatGPT:** ChatGPT search leans on Bing's index, and Bing had
+  not indexed the site at all on 2026-10-04 (Google had). After every
+  production deploy run `node scripts/indexnow.mjs`; the key file is in
+  `public/`. Bing Webmaster Tools still needs a human to verify the site
+  (import from Google Search Console is fastest).
 
 ## 3b. How leads reach the shop
 

@@ -5,7 +5,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import MobileDock from "@/components/MobileDock";
 import OwnerPopup from "@/components/OwnerPopup";
-import { site, allCities, services } from "@/lib/site";
+import { site, allCities, cityZips, services } from "@/lib/site";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -60,7 +60,9 @@ export const metadata: Metadata = {
     description: `We come to you. ${site.aseYears} years ASE certified. Open 24 hours.`,
     images: ["/img/logo-source.jpg"],
   },
-  alternates: { canonical: "/" },
+  // No canonical here: a root-layout canonical is inherited by any page that
+  // forgets its own and quietly tells Google that page is the home page.
+  // Every page sets its own.
   robots: { index: true, follow: true },
   icons: {
     icon: [{ url: "/img/logo-icon.png", type: "image/png", sizes: "512x512" }],
@@ -100,9 +102,18 @@ const localBusiness = {
     addressRegion: site.baseRegion,
     addressCountry: "US",
   },
+  // Each town carries its ZIP codes, so a search by ZIP can match the
+  // business as well as a search by town name.
   areaServed: allCities.map((c) => ({
     "@type": "City",
     name: `${c}, TX`,
+    address: cityZips[c].map((zip) => ({
+      "@type": "PostalAddress",
+      addressLocality: c,
+      addressRegion: site.baseRegion,
+      postalCode: zip,
+      addressCountry: "US",
+    })),
   })),
   openingHoursSpecification: [
     {

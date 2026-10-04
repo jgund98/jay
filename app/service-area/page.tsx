@@ -3,11 +3,11 @@ import PageHead from "@/components/PageHead";
 import ServiceArea from "@/components/ServiceArea";
 import CallBand from "@/components/CallBand";
 import { Stagger, Item } from "@/components/Reveal";
-import { site, coreCities, allCities } from "@/lib/site";
+import { site, coreCities, allCities, cityZips } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Service Area — Mobile Mechanic in Montgomery County & North Houston",
-  description: `${site.name} covers Conroe, Montgomery, Spring, Humble, Porter, Anderson, The Woodlands, Willis, Magnolia, Tomball, Kingwood, New Caney and the rest of Montgomery County. We come to you. Call ${site.phone}.`,
+  title: "Service Area & ZIP Codes — Mobile Mechanic, Montgomery County TX",
+  description: `${site.name} covers Conroe (77301-77306, 77384, 77385), Montgomery (77316, 77356), Spring, The Woodlands, Humble, Kingwood, Porter, Magnolia, Tomball, Willis, New Caney and the rest of Montgomery County. We come to you. Call ${site.phone}.`,
   alternates: { canonical: "/service-area" },
 };
 
@@ -62,14 +62,20 @@ export default function ServiceAreaPage() {
                   <h3 className="font-display text-[21px] font-extrabold text-steel-dark">
                     {c}, TX
                   </h3>
+                  <p className="mt-1.5 flex flex-wrap gap-x-3 font-mono text-[12.5px] tracking-[0.06em] text-violet">
+                    {cityZips[c].map((z) => (
+                      <span key={z}>{z}</span>
+                    ))}
+                  </p>
                   <p className="mt-2.5 text-[15px] leading-relaxed text-steel">
                     {notes[c]}
                   </p>
                   <a
                     href={site.phoneHref}
-                    className="mt-4 inline-flex font-display text-[14px] font-bold text-violet underline-offset-4 hover:underline"
+                    className="mt-4 inline-block font-display text-[14px] font-bold text-violet underline-offset-4 hover:underline"
                   >
-                    Mobile mechanic in {c} → {site.phone}
+                    Mobile mechanic in {c} →{" "}
+                    <span className="whitespace-nowrap">{site.phone}</span>
                   </a>
                 </div>
               </Item>
@@ -80,10 +86,26 @@ export default function ServiceAreaPage() {
             <h3 className="font-display text-[19px] font-extrabold text-steel-dark">
               Also rolling to
             </h3>
-            <p className="mt-3 text-[15.5px] leading-relaxed text-steel">
-              {extras.join(", ")} — plus Cut and Shoot, the Lake Conroe
-              neighborhoods, and everywhere in between. Sitting just outside the
-              list?{" "}
+            {/* CSS columns, not a grid, and two of them: 14 towns split
+                7/7. Three columns went 5/5/4 and left a hole. */}
+            <ul className="mt-4 gap-x-10 sm:columns-2">
+              {extras.map((c) => (
+                <li
+                  key={c}
+                  className="flex break-inside-avoid items-baseline justify-between gap-4 border-b border-steel/10 py-2.5"
+                >
+                  <span className="font-display text-[15.5px] font-bold text-steel-dark">
+                    {c}
+                  </span>
+                  <span className="font-mono text-[12.5px] tracking-[0.06em] text-steel">
+                    {cityZips[c].join(" · ")}
+                  </span>
+                </li>
+              ))}
+            </ul>
+            <p className="mt-5 text-[15.5px] leading-relaxed text-steel">
+              Plus the Lake Conroe neighborhoods and everywhere in between.
+              Sitting just outside the list?{" "}
               <a
                 href={site.phoneHref}
                 className="font-semibold text-violet underline-offset-4 hover:underline"
